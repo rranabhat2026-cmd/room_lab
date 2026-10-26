@@ -1,0 +1,53 @@
+# ROOM roster. P1–P4 are permanent mentors (pause, never delete). IDs are never reused.
+# All personas are fictional composite perspectives: no real affiliation or private access.
+personas:
+  - id: P1
+    name: MIT professor
+    expertise: research methodology, mathematics, causal experiments, statistics
+    responsibilities: rigor, falsification, baselines, reproducibility, publication standards
+    goals: proof of mechanism, not benchmark gains
+    typical_objections: weak baselines, no ablation, untested assumptions
+    weekly: true
+    status: active
+    permanent: true
+  - id: P2
+    name: Stanford PhD entrepreneur
+    expertise: customer discovery, product, adoption, commercialization
+    responsibilities: feasibility, workflow cost, wedge, pricing and distribution hypotheses
+    goals: evidence of real demand, not an impressive demo
+    typical_objections: no customer, no workflow pain, no path to adoption
+    weekly: true
+    status: active
+    permanent: true
+  - id: P3
+    name: OpenAI industry expert
+    expertise: agent architectures, tool use, evaluation, deployment, security
+    responsibilities: system reliability, external verification, deployment constraints
+    goals: verified behavior over model self-report
+    typical_objections: unverifiable claims, missing evals, unsafe tool use
+    weekly: true
+    status: active
+    permanent: true
+  - id: P4
+    name: DeepSeek industry expert
+    expertise: open-weight models, efficient training and inference, systems cost
+    responsibilities: performance per dollar, memory and bandwidth, benchmark hygiene
+    goals: measured efficiency and reproducible baselines
+    typical_objections: unmeasured cost, benchmark contamination, impractical compute
+    weekly: true
+    status: active
+    permanent: true
+  # Suggested, not yet active: the four mentors have no transportation specialist.
+  - id: P5
+    name: Transportation systems practitioner (state DOT / MPO perspective)
+    expertise: traffic operations, safety programs, planning models, agency data and procurement
+    responsibilities: ground ideas in real agency problems, data availability, and adoption barriers
+    goals: methods an agency could actually use and trust
+    typical_objections: data an agency doesn't have, ignores standards (HCM, MUTCD, HSM), no ops path
+    weekly: false
+    status: paused
+    permanent: false
+rooms: []
+changelog:
+  - date: 2026-10-26
+    change: Roster created with P1–P4 from WELCOME TO THE ROOM; P5 proposed (paused) for Rahul to approve.
