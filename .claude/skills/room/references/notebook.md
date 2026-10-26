@@ -47,7 +47,7 @@ a short **State to carry forward** block Rahul can paste next time.
   and update **Demonstrated skills** in `learner-profile.md` only from
   graded evidence.
 - Roster change: edit `roster.yaml` and note the change in its `changelog`.
-- Then commit with a short message (`room: weekly 2026-10-30`) and push the
+- Then commit with a short message (`room: weekly 2026-11-01`) and push the
   working branch. If committing or pushing fails, tell Rahul exactly which
   files are unsaved.
 

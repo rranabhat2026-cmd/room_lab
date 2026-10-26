@@ -5,7 +5,7 @@ by `scripts/render_report.py` (Python standard library only). No external
 fonts, scripts, or CDNs. Light and dark themes are built in.
 
 ```bash
-python3 .claude/skills/room/scripts/render_report.py notebook/briefings/2026-10-30.json notebook/briefings/2026-10-30.html
+python3 .claude/skills/room/scripts/render_report.py notebook/briefings/2026-11-01.json notebook/briefings/2026-11-01.html
 ```
 
 The renderer refuses to overwrite an existing file; use a new dated path
@@ -20,8 +20,8 @@ markers become links to the matching source; unknown markers fail.
 ```json
 {
   "eyebrow": "WELCOME TO THE ROOM · Weekly briefing",
-  "title": "Weekly briefing — 30 Oct 2026",
-  "date": "As of 2026-10-30 08:00 America/New_York · window 2026-10-23 to 2026-10-30",
+  "title": "Weekly briefing — 1 Nov 2026",
+  "date": "As of 2026-11-01 08:00 America/New_York · window 2026-10-25 to 2026-11-01",
   "summary": "Executive verdict in 3–5 sentences [S1].",
   "notice": "P# attributes a persona's view, not evidence. Synthetic items are labeled.",
   "sections": [
@@ -40,7 +40,7 @@ markers become links to the matching source; unknown markers fail.
   "sources": [
     {"id": "S1", "title": "Paper title", "url": "https://arxiv.org/abs/...", "date": "posted 2026-10-28", "note": "abstract read"},
     {"id": "R1", "title": "Rahul's report.html", "path": "uploaded file, section 3"},
-    {"id": "N1", "title": "Last week's briefing", "path": "notebook/briefings/2026-10-23.json"}
+    {"id": "N1", "title": "Last week's briefing", "path": "notebook/briefings/2026-10-25.json"}
   ],
   "skill_drafts": [
     {"name": "lowercase-hyphen-name", "value": "Why it's useful.", "attribution": "Original draft derived from this room exercise.", "markdown": "---\nname: ...\n---\n..."}

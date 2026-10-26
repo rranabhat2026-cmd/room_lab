@@ -19,3 +19,4 @@ _None recorded yet._
 
 ## Preferences
 - Reports as self-contained HTML; conversation in Markdown.
+- Weekly run (briefing + training pack): Sunday morning, America/New_York.

@@ -37,17 +37,19 @@ personas:
     weekly: true
     status: active
     permanent: true
-  # Suggested, not yet active: the four mentors have no transportation specialist.
+  # Added because the four mentors have no transportation specialist.
   - id: P5
     name: Transportation systems practitioner (state DOT / MPO perspective)
     expertise: traffic operations, safety programs, planning models, agency data and procurement
     responsibilities: ground ideas in real agency problems, data availability, and adoption barriers
     goals: methods an agency could actually use and trust
     typical_objections: data an agency doesn't have, ignores standards (HCM, MUTCD, HSM), no ops path
-    weekly: false
-    status: paused
+    weekly: true
+    status: active
     permanent: false
 rooms: []
 changelog:
   - date: 2026-10-26
     change: Roster created with P1–P4 from WELCOME TO THE ROOM; P5 proposed (paused) for Rahul to approve.
+  - date: 2026-10-26
+    change: P5 activated and added to the weekly briefing at Rahul's request.
