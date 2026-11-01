@@ -1,0 +1,180 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training pack — week of 1 Nov 2026</title><style>
+:root{color-scheme:light;--bg:#f4f7f8;--card:#fff;--ink:#172a32;--muted:#53646c;--line:#d9e3e7;--accent:#086c65;--soft:#edf7f4;--th:#edf3f5;--pre:#f4f7f8}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1719;--card:#162124;--ink:#e3ecee;--muted:#9fb1b7;--line:#2a3a3f;--accent:#5cc8bd;--soft:#16302d;--th:#1d2b2f;--pre:#111b1e}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1719;--card:#162124;--ink:#e3ecee;--muted:#9fb1b7;--line:#2a3a3f;--accent:#5cc8bd;--soft:#16302d;--th:#1d2b2f;--pre:#111b1e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,sans-serif}
+main{max-width:1040px;margin:36px auto;padding:40px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700}
+h1{font-size:2.25rem;line-height:1.2;margin:12px 0}h2{font-size:1.35rem;line-height:1.35;margin:0 0 14px}
+p{margin:10px 0 16px}.meta{color:var(--muted);font-size:.88rem}.summary{font-size:1.12rem;font-weight:550}
+.notice{background:var(--soft);border-left:4px solid var(--accent);padding:12px 16px}
+nav{display:flex;gap:8px 16px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--line)}
+nav a{font-size:.88rem}a{color:var(--accent);text-underline-offset:3px;overflow-wrap:anywhere}
+section{padding:28px 0 6px;border-bottom:1px solid var(--line)}section:last-child{border:0}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.93rem;margin:14px 0}
+th,td{padding:11px 12px;text-align:left;border:1px solid var(--line);vertical-align:top}th{background:var(--th)}
+.filter{display:none;width:100%;max-width:360px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit}
+.js .filter{display:block}
+li{margin:7px 0}ul.checklist{list-style:none;padding-left:0}ul.checklist label{display:flex;gap:10px;align-items:flex-start}
+details{margin:14px 0;border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+summary{cursor:pointer;font-weight:650}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:.84rem/1.55 ui-monospace,monospace;background:var(--pre);padding:16px;border-radius:6px}
+.download{display:inline-block;padding:7px 12px;border:1px solid var(--accent);border-radius:6px;margin:6px 0}
+@media(max-width:650px){main{margin:0;padding:22px 16px;border:0;border-radius:0}h1{font-size:1.8rem}th,td{padding:8px}}
+@media print{body{background:white;color:black}main{margin:0;border:0;padding:0;max-width:none}nav,.download,.filter{display:none!important}section{break-inside:auto}h2{break-after:avoid}details.solution:not([open]){display:none}}
+</style></head><body><main>
+<header><div class="eyebrow">WELCOME TO THE ROOM · Training pack #1</div><h1>Training pack — week of 1 Nov 2026</h1>
+<p class="meta">Set Sun 2026-11-01 (America/New_York) · due Sat 2026-11-07 23:59 · budget 9.0 h</p><p class="summary">This week you build the habit every mentor demanded in the briefing: a classical baseline plus an independent check. You finish the Verified Physics Residual Lab, learn Empirical Bayes (the honest way to rank dangerous sites, newly relevant after the SS4A awards <a href="#S1">[S1]</a>), and learn how the relative gap lets a verifier check an LLM-driven traffic assignment <a href="#S9">[S9]</a>.</p>
+<p class="notice">Scores start Not assessed. Only submitted work is graded. Worked examples teach the method; the tasks need new work.</p>
+</header><nav aria-label="Report sections">
+<a href="#section-1">This week&#x27;s focus</a>
+<a href="#section-2">Recognize</a>
+<a href="#section-3">Understand 1 · The residual tells you about the physics, not the data</a>
+<a href="#section-4">Understand 2 · Empirical Bayes: shrink toward what similar sites do</a>
+<a href="#section-5">Understand 3 · User equilibrium and the relative gap as a verifier</a>
+<a href="#section-6">Task 1 · Coding: Verified Physics Residual Lab (20 pts · 2.5 h · P3/P4)</a>
+<a href="#section-7">Task 2 · Derivation (20 pts · 1.0 h · P1)</a>
+<a href="#section-8">Task 3 · Paper reading (10 pts · 1.25 h · P1/P5)</a>
+<a href="#section-9">Task 4 · Customer discovery (part of Communication · 0.5 h · P2)</a>
+<a href="#section-10">Task 5 · Writing (part of Communication · 1.5 h · all mentors)</a>
+<a href="#section-11">Task 6 · Oral quiz, written answers (Terminology 15 + Concepts 25 · 0.5 h)</a>
+<a href="#section-12">Task 7 · Shared room problem (Concepts · 0.5 h)</a>
+<a href="#section-13">Time budget</a>
+<a href="#section-14">Checklist</a>
+<a href="#section-15">Retrieval checkpoints</a>
+<a href="#section-16">Hints</a>
+<a href="#section-17">Scoreboard</a>
+<a href="#sources">Sources</a>
+</nav>
+<section id="section-1"><h2>This week&#x27;s focus</h2>
+<div class="table-wrap"><table id="table-1"><thead><tr><th scope="col">#</th><th scope="col">Skill</th><th scope="col">Owner</th><th scope="col">Tag</th><th scope="col">Observable objective</th><th scope="col">Why now (transportation)</th></tr></thead><tbody>
+<tr><td>1</td><td>Verified Physics Residual Lab</td><td>P1, P3</td><td>Learn now</td><td>Your code recovers â within noise, reports residual MSE, and a separate verifier returns PASS/FAIL/UNKNOWN correctly on 3 corrupted cases.</td><td>The same pattern carries to LWR traffic flow and to checking any model&#x27;s claims.</td></tr>
+<tr><td>2</td><td>Empirical Bayes and regression to the mean</td><td>P1, P5</td><td>Learn now</td><td>You can derive the EB weight and explain why raw-count rankings overstate risk.</td><td>297 SS4A awards will rank and evaluate sites <a href="#S1">[S1]</a>.</td></tr>
+<tr><td>3</td><td>User equilibrium and relative gap</td><td>P3</td><td>Practice next</td><td>You can compute a 2-route equilibrium and a relative gap by hand and say what a verifier checks.</td><td>LLMs are being connected to assignment engines <a href="#S9">[S9]</a>.</td></tr>
+<tr><td>4</td><td>Customer discovery basics</td><td>P2</td><td>Practice next</td><td>You draft 5 interview questions that test a real need without pitching.</td><td>Award winners must report outcomes.</td></tr>
+<tr><td>5</td><td>Koopman / EDMD</td><td>P4</td><td>Explore later</td><td>Not this week.</td><td>Bridge project after the Residual Lab <a href="#S11">[S11]</a>.</td></tr>
+</tbody></table></div>
+</section>
+<section id="section-2"><h2>Recognize</h2>
+<ul><li>SPF — safety performance function: predicted crashes per year for a site type as a function of traffic volume and geometry.</li><li>EB — Empirical Bayes estimate: weighted average of the SPF prediction and the site&#x27;s observed crashes.</li><li>k — negative binomial overdispersion parameter: how much more crash counts vary than a Poisson process would.</li><li>RTM — regression to the mean: sites picked for high counts tend to show lower counts next period even with no treatment.</li><li>CMF — crash modification factor: expected crashes after / before a countermeasure (0.8 means 20% fewer).</li><li>HSM — Highway Safety Manual (AASHTO); Part B covers network screening and evaluation.</li><li>Wardrop UE — user equilibrium: no driver can lower their travel time by switching routes.</li><li>Relative gap — (total system travel time − demand × shortest-path time) / total system travel time; zero at exact UE.</li><li>MCP — Model Context Protocol: a standard way for an LLM to call external tools such as a planning engine.</li><li>Manufactured solution — a chosen exact answer used to test a numerical method, because the truth is known.</li></ul>
+</section>
+<section id="section-3"><h2>Understand 1 · The residual tells you about the physics, not the data</h2>
+<p>Intuition: data error asks &#x27;do I match the measurements?&#x27;; physics residual asks &#x27;do I satisfy the governing equation?&#x27;. A model can pass one and fail the other.</p>
+<p>Setup (from the starter): truth u*(x) = sin(πx) + 0.25 sin(3πx); model û(x) = sin(πx) + â sin(3πx); equation u&#x27;&#x27; = f(x) with f(x) = −π² sin(πx) − 9π²(0.25) sin(3πx).</p>
+<p>Worked derivation: û&#x27;&#x27;(x) = −π² sin(πx) − 9π² â sin(3πx). Therefore R(x) = û&#x27;&#x27;(x) − f(x) = −9π²(â − 0.25) sin(3πx). The residual is zero exactly when â = 0.25.</p>
+<p>Worked number: over [0, 1] the mean of sin²(3πx) is 1/2, so residual MSE = 81π⁴(â − 0.25)²/2. For â = 0.30 that is 81 × 97.409 × 0.0025 / 2 ≈ 9.86 (checked numerically: 9.86).</p>
+<p>Why it matters for traffic: in LWR the residual is ∂ρ/∂t + ∂q/∂x. A forecaster with small data error can still create or destroy vehicles, and the residual exposes it.</p>
+<p>Limitation: a small residual only means &#x27;consistent with this equation&#x27;. If the equation is wrong for the regime (incidents, capacity drop), a perfect residual is false comfort. Simpler alternative: a conventional finite-difference solve is often enough when the equation and boundary conditions are known.</p>
+</section>
+<section id="section-4"><h2>Understand 2 · Empirical Bayes: shrink toward what similar sites do</h2>
+<p>Intuition: a site with 12 crashes in 3 years looks terrible, but part of that is bad luck. EB asks how much to trust the site&#x27;s own history against what similar sites usually experience.</p>
+<p>Formulation (HSM Part B style): over n years, the SPF predicts Σμ crashes. With overdispersion k, the weight w = 1 / (1 + k·Σμ). The EB expected crashes are N_exp = w·Σμ + (1 − w)·N_obs. Units: crashes over the same n years.</p>
+<p>Worked example (checked): Σμ = 6.0 crashes in 3 years, k = 0.5, N_obs = 12. w = 1/(1 + 0.5 × 6) = 0.25. N_exp = 0.25 × 6 + 0.75 × 12 = 10.5 crashes, i.e. 3.5 per year instead of the raw 4.0.</p>
+<p>Reading the weight: large k (counts are noisy) or a large Σμ (much expected exposure) pushes w down, so you trust the site&#x27;s own record more. That is not intuitive at first; you will derive why in Task 2.</p>
+<p>Application: rank sites by N_exp − Σμ (excess expected crashes), not by raw counts. For before/after studies, EB corrects the RTM bias that makes almost any treatment look effective at a site chosen after a bad year.</p>
+<p>Limitation: EB is only as good as the SPF; an SPF from another state needs a local calibration factor. Simpler alternative: for quick screening, crash rate per million entering vehicles is acceptable if you say it ignores RTM.</p>
+</section>
+<section id="section-5"><h2>Understand 3 · User equilibrium and the relative gap as a verifier</h2>
+<p>Intuition: at equilibrium every used route between an origin and destination takes the same time, and no unused route is faster.</p>
+<p>Worked example (checked): 1000 veh/h, route 1 time t1 = 10 + 0.01·x1 min, route 2 time t2 = 15 + 0.005·x2 min. Setting t1 = t2 with x1 + x2 = 1000 gives 0.015·x1 = 10, so x1 ≈ 666.7, x2 ≈ 333.3, and both routes take ≈ 16.67 min. Relative gap = 0.</p>
+<p>Off-equilibrium check: x1 = 800, x2 = 200 gives t1 = 18, t2 = 16. Total time = 800·18 + 200·16 = 17,600 veh·min; demand × shortest = 1000·16 = 16,000; gap = 1,600 / 17,600 ≈ 0.091.</p>
+<p>Why a verifier loves this: the gap can be recomputed from link flows and travel-time functions alone, without trusting whatever produced the flows, including an LLM.</p>
+<p>Limitation: a zero gap proves equilibrium for the network you were given, not that the network edit was the one the planner asked for. That second check needs a spec of the intended edit.</p>
+</section>
+<section id="section-6"><h2>Task 1 · Coding: Verified Physics Residual Lab (20 pts · 2.5 h · P3/P4)</h2>
+<p>Build it in Python with NumPy (and Matplotlib for one plot). Fixed seeds 0–9; sample sizes n ∈ {10, 50}; noise σ ∈ {0.01, 0.1}; points xᵢ uniform on [0, 1] from the seeded generator.</p>
+<p>Deliverables: (a) fit.py estimates â by least squares and writes results.csv (seed, n, σ, â, data MSE, residual MSE on a 1,001-point grid, boundary error); (b) baseline.py solves u&#x27;&#x27; = f with u(0) = u(1) = 0 by second-order finite differences on 101 points and reports max error against u*; (c) verify.py independently recomputes every metric from the saved inputs and prints PASS / FAIL / UNKNOWN per row; (d) one plot of â error versus n and σ.</p>
+<p>Deliberate failure cases verify.py must handle: a row where you edit â by hand (FAIL); a missing input file (UNKNOWN); a design where every xᵢ is in {0, 1/3, 2/3, 1}, so Σφᵢ² = 0 and â is undefined (UNKNOWN, not a crash or a number).</p>
+<p>Acceptance: mean â within 2 standard errors of 0.25 for every (n, σ); verifier verdicts correct on all three failure cases; finite-difference max error below 1e-3; README states exactly what was run.</p>
+<pre><code># skeleton — fill in, do not just run
+import numpy as np
+
+def design(seed, n):
+    return np.sort(np.random.default_rng(seed).uniform(0, 1, n))
+
+def a_hat(x, y):
+    phi = np.sin(3 * np.pi * x)
+    denom = np.sum(phi ** 2)
+    if denom &lt; 1e-12:
+        return None  # undefined: the verifier should say UNKNOWN
+    return np.sum(phi * (y - np.sin(np.pi * x))) / denom</code></pre>
+</section>
+<section id="section-7"><h2>Task 2 · Derivation (20 pts · 1.0 h · P1)</h2>
+<ul><li>(a) Show that â is unbiased and that Var(â) = σ² / Σφᵢ² when εᵢ are independent with variance σ². State every assumption. Then say what happens to Var(â) when points cluster near x = 1/3.</li><li>(b) Assume a site&#x27;s true mean m has a gamma prior with mean Σμ and variance k·(Σμ)², and N_obs given m is Poisson. Show that the posterior mean is w·Σμ + (1 − w)·N_obs and find w. Explain in two sentences why larger k lowers w.</li><li>(c) Interpretation: name one real situation where the gamma-Poisson assumption breaks for crash data, and what it would do to EB rankings.</li></ul>
+</section>
+<section id="section-8"><h2>Task 3 · Paper reading (10 pts · 1.25 h · P1/P5)</h2>
+<p>Read arXiv 2610.16140, LLM-assisted planning with a differentiable user-equilibrium layer <a href="#S9">[S9]</a>. ROOM only saw its abstract, so check everything against the paper itself.</p>
+<ul><li>Hypothesis: what exactly do the authors claim the LLM + UE layer enables?</li><li>Method: what does the differentiable layer let them do that a normal AequilibraE run cannot?</li><li>Strongest evidence and weakest evidence, with section numbers.</li><li>Missing control: what experiment would show the LLM&#x27;s edits were correct, not just that the solver converged?</li><li>Transfer: how would you test this on a Florida MPO network, and what would P5 object to?</li></ul>
+</section>
+<section id="section-9"><h2>Task 4 · Customer discovery (part of Communication · 0.5 h · P2)</h2>
+<p>Write 5 interview questions for a city engineer whose city won an SS4A award <a href="#S1">[S1]</a>. Rules: ask about their last real experience (for example &#x27;Walk me through how you chose the locations in your application&#x27;), never pitch a product, and include one question about who pays for evaluation and how it is procured.</p>
+</section>
+<section id="section-10"><h2>Task 5 · Writing (part of Communication · 1.5 h · all mentors)</h2>
+<p>Write 500–800 words in your own words, Medium style. Suggested title: &#x27;The most dangerous intersection on your list probably isn&#x27;t&#x27;.</p>
+<p>Include one original plot from a tiny simulation: 200 sites with the same true crash rate (Poisson, mean 3 per year, fixed seed); pick the 10 worst in year 1; show their year-2 counts. Explain what this means for a city choosing SS4A projects. Label the data synthetic.</p>
+</section>
+<section id="section-11"><h2>Task 6 · Oral quiz, written answers (Terminology 15 + Concepts 25 · 0.5 h)</h2>
+<ul><li>Why can a model have low data MSE and high physics residual? Give a traffic example.</li><li>In EB, what does the SPF represent, and what goes wrong if it comes from another state uncalibrated?</li><li>A countermeasure was installed at the 10 sites with the most crashes last year, and crashes fell 30%. List two reasons this may not be the countermeasure&#x27;s effect.</li><li>What does a relative gap of 0.02 mean in words?</li><li>Design an experiment that could refute this claim: &#x27;Our LLM planning assistant never makes wrong network edits.&#x27; Include the metric and what result would refute it.</li><li>Define CMF and give a value that would mean a countermeasure increases crashes.</li></ul>
+</section>
+<section id="section-12"><h2>Task 7 · Shared room problem (Concepts · 0.5 h)</h2>
+<p>The room&#x27;s design question: an LLM assistant edits a regional planning model on request and runs assignment. Each mentor&#x27;s requirement: P1 wants a falsifiable accuracy test; P2 wants planners to save real hours; P3 wants every edit independently verified; P4 wants it cheap enough to run per request on a laptop; P5 wants outputs in the units an MPO board understands. Write one page: where these requirements conflict, what you would build first, and why.</p>
+</section>
+<section id="section-13"><h2>Time budget</h2>
+<div class="table-wrap"><table id="table-13"><thead><tr><th scope="col">Block</th><th scope="col">Hours</th></tr></thead><tbody>
+<tr><td>Read the three Understand sections</td><td>1.0</td></tr>
+<tr><td>Task 1 coding (including setup)</td><td>2.5</td></tr>
+<tr><td>Task 2 derivation</td><td>1.0</td></tr>
+<tr><td>Task 3 paper reading</td><td>1.25</td></tr>
+<tr><td>Task 4 interview questions</td><td>0.5</td></tr>
+<tr><td>Task 5 writing with plot</td><td>1.5</td></tr>
+<tr><td>Task 6 quiz</td><td>0.5</td></tr>
+<tr><td>Task 7 room problem</td><td>0.5</td></tr>
+<tr><td>Retrieval checks (+1 day, +1 week)</td><td>0.25</td></tr>
+<tr><td>Total</td><td>9.0</td></tr>
+<tr><td>Stretch (optional, extra): replace â&#x27;s single mode with a 3-mode correction and compare residual MSE</td><td>+1.5</td></tr>
+</tbody></table></div>
+</section>
+<section id="section-14"><h2>Checklist</h2>
+<ul class="checklist"><li><label><input type="checkbox"> <span>Read Understand 1–3</span></label></li><li><label><input type="checkbox"> <span>Task 1: fit.py, baseline.py, verify.py, plot, README</span></label></li><li><label><input type="checkbox"> <span>Task 1: three failure cases give FAIL / UNKNOWN / UNKNOWN</span></label></li><li><label><input type="checkbox"> <span>Task 2: derivations (a)–(c)</span></label></li><li><label><input type="checkbox"> <span>Task 3: reading answers with section numbers</span></label></li><li><label><input type="checkbox"> <span>Task 4: five interview questions</span></label></li><li><label><input type="checkbox"> <span>Task 5: draft or link with synthetic-data plot</span></label></li><li><label><input type="checkbox"> <span>Task 6: quiz answers</span></label></li><li><label><input type="checkbox"> <span>Task 7: one-page synthesis</span></label></li><li><label><input type="checkbox"> <span>Retrieval +1 day and +1 week done closed-book</span></label></li><li><label><input type="checkbox"> <span>Submit: /room grade with files or links</span></label></li></ul>
+</section>
+<section id="section-15"><h2>Retrieval checkpoints</h2>
+<ul><li>+1 day (Mon 2 Nov), closed book: write the EB formula, define w, and explain in two sentences why raw-count rankings mislead.</li><li>+1 week (Sun 8 Nov), closed book: derive R(x) for the Residual Lab model and state what a zero residual does and does not prove.</li><li>These are study-plan items; no reminders were scheduled.</li></ul>
+</section>
+<section id="section-16"><h2>Hints</h2>
+<details class="solution"><summary>Show hints (try first)</summary>
+<ul><li>Task 2(a): write â − 0.25 as Σφᵢεᵢ / Σφᵢ²; expectations and variances of sums of independent terms do the rest.</li><li>Task 2(b): the gamma prior is conjugate to the Poisson; match the shape and rate parameters to mean Σμ and variance k·(Σμ)².</li><li>Task 1: keep verify.py ignorant of fit.py&#x27;s internals; it should only read inputs, outputs and the formulas.</li><li>Task 5: with a fixed seed, the year-1 &#x27;worst 10&#x27; average will sit well above 3; their year-2 average should fall back near 3.</li></ul>
+</details>
+</section>
+<section id="section-17"><h2>Scoreboard</h2>
+<div class="table-wrap"><table id="table-17"><thead><tr><th scope="col">Category</th><th scope="col">Points</th><th scope="col">Score</th></tr></thead><tbody>
+<tr><td>Terminology</td><td>15</td><td>Not assessed</td></tr>
+<tr><td>Concepts</td><td>25</td><td>Not assessed</td></tr>
+<tr><td>Math / technical</td><td>20</td><td>Not assessed</td></tr>
+<tr><td>Coding / experiment</td><td>20</td><td>Not assessed</td></tr>
+<tr><td>Paper synthesis</td><td>10</td><td>Not assessed</td></tr>
+<tr><td>Communication</td><td>10</td><td>Not assessed</td></tr>
+</tbody></table></div>
+</section>
+<section id="sources"><h2>Sources</h2><ul>
+<li id="S1"><strong>[S1]</strong> <a href="https://www.transportation.gov/grants/SS4A">USDOT — Safe Streets and Roads for All (SS4A) Grant Program page</a>
+ · lists FY26 awards dated 2026-10-30
+ · search-index excerpt; page not opened (host blocked)
+</li>
+<li id="S9"><strong>[S9]</strong> <a href="https://arxiv.org/abs/2610.16140">arXiv 2610.16140 — LLM Assisted Transportation Planning through a Differentiable User Equilibrium Layer</a>
+ · submitted 2026-10-12 (background)
+ · abstract-level via search index
+</li>
+<li id="S11"><strong>[S11]</strong> <a href="https://arxiv.org/abs/2610.19442">arXiv 2610.19442 — Traffic State Prediction and Control Using a Koopman Operator Framework with Polynomial Observables</a>
+ · October 2026; exact date unverified
+ · title and one-line description only
+</li>
+<li id="N1"><strong>[N1]</strong> ROOM project portfolio
+ · notebook/projects.md
+</li>
+<li id="N3"><strong>[N3]</strong> Learner profile
+ · notebook/learner-profile.md
+</li>
+</ul></section>
+</main>
+</body></html>

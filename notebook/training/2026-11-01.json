@@ -1,0 +1,338 @@
+{
+ "eyebrow": "WELCOME TO THE ROOM · Training pack #1",
+ "title": "Training pack — week of 1 Nov 2026",
+ "date": "Set Sun 2026-11-01 (America/New_York) · due Sat 2026-11-07 23:59 · budget 9.0 h",
+ "summary": "This week you build the habit every mentor demanded in the briefing: a classical baseline plus an independent check. You finish the Verified Physics Residual Lab, learn Empirical Bayes (the honest way to rank dangerous sites, newly relevant after the SS4A awards [S1]), and learn how the relative gap lets a verifier check an LLM-driven traffic assignment [S9].",
+ "notice": "Scores start Not assessed. Only submitted work is graded. Worked examples teach the method; the tasks need new work.",
+ "sections": [
+  {
+   "title": "This week's focus",
+   "table": {
+    "headers": [
+     "#",
+     "Skill",
+     "Owner",
+     "Tag",
+     "Observable objective",
+     "Why now (transportation)"
+    ],
+    "rows": [
+     [
+      "1",
+      "Verified Physics Residual Lab",
+      "P1, P3",
+      "Learn now",
+      "Your code recovers â within noise, reports residual MSE, and a separate verifier returns PASS/FAIL/UNKNOWN correctly on 3 corrupted cases.",
+      "The same pattern carries to LWR traffic flow and to checking any model's claims."
+     ],
+     [
+      "2",
+      "Empirical Bayes and regression to the mean",
+      "P1, P5",
+      "Learn now",
+      "You can derive the EB weight and explain why raw-count rankings overstate risk.",
+      "297 SS4A awards will rank and evaluate sites [S1]."
+     ],
+     [
+      "3",
+      "User equilibrium and relative gap",
+      "P3",
+      "Practice next",
+      "You can compute a 2-route equilibrium and a relative gap by hand and say what a verifier checks.",
+      "LLMs are being connected to assignment engines [S9]."
+     ],
+     [
+      "4",
+      "Customer discovery basics",
+      "P2",
+      "Practice next",
+      "You draft 5 interview questions that test a real need without pitching.",
+      "Award winners must report outcomes."
+     ],
+     [
+      "5",
+      "Koopman / EDMD",
+      "P4",
+      "Explore later",
+      "Not this week.",
+      "Bridge project after the Residual Lab [S11]."
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Recognize",
+   "bullets": [
+    "SPF — safety performance function: predicted crashes per year for a site type as a function of traffic volume and geometry.",
+    "EB — Empirical Bayes estimate: weighted average of the SPF prediction and the site's observed crashes.",
+    "k — negative binomial overdispersion parameter: how much more crash counts vary than a Poisson process would.",
+    "RTM — regression to the mean: sites picked for high counts tend to show lower counts next period even with no treatment.",
+    "CMF — crash modification factor: expected crashes after / before a countermeasure (0.8 means 20% fewer).",
+    "HSM — Highway Safety Manual (AASHTO); Part B covers network screening and evaluation.",
+    "Wardrop UE — user equilibrium: no driver can lower their travel time by switching routes.",
+    "Relative gap — (total system travel time − demand × shortest-path time) / total system travel time; zero at exact UE.",
+    "MCP — Model Context Protocol: a standard way for an LLM to call external tools such as a planning engine.",
+    "Manufactured solution — a chosen exact answer used to test a numerical method, because the truth is known."
+   ]
+  },
+  {
+   "title": "Understand 1 · The residual tells you about the physics, not the data",
+   "paragraphs": [
+    "Intuition: data error asks 'do I match the measurements?'; physics residual asks 'do I satisfy the governing equation?'. A model can pass one and fail the other.",
+    "Setup (from the starter): truth u*(x) = sin(πx) + 0.25 sin(3πx); model û(x) = sin(πx) + â sin(3πx); equation u'' = f(x) with f(x) = −π² sin(πx) − 9π²(0.25) sin(3πx).",
+    "Worked derivation: û''(x) = −π² sin(πx) − 9π² â sin(3πx). Therefore R(x) = û''(x) − f(x) = −9π²(â − 0.25) sin(3πx). The residual is zero exactly when â = 0.25.",
+    "Worked number: over [0, 1] the mean of sin²(3πx) is 1/2, so residual MSE = 81π⁴(â − 0.25)²/2. For â = 0.30 that is 81 × 97.409 × 0.0025 / 2 ≈ 9.86 (checked numerically: 9.86).",
+    "Why it matters for traffic: in LWR the residual is ∂ρ/∂t + ∂q/∂x. A forecaster with small data error can still create or destroy vehicles, and the residual exposes it.",
+    "Limitation: a small residual only means 'consistent with this equation'. If the equation is wrong for the regime (incidents, capacity drop), a perfect residual is false comfort. Simpler alternative: a conventional finite-difference solve is often enough when the equation and boundary conditions are known."
+   ]
+  },
+  {
+   "title": "Understand 2 · Empirical Bayes: shrink toward what similar sites do",
+   "paragraphs": [
+    "Intuition: a site with 12 crashes in 3 years looks terrible, but part of that is bad luck. EB asks how much to trust the site's own history against what similar sites usually experience.",
+    "Formulation (HSM Part B style): over n years, the SPF predicts Σμ crashes. With overdispersion k, the weight w = 1 / (1 + k·Σμ). The EB expected crashes are N_exp = w·Σμ + (1 − w)·N_obs. Units: crashes over the same n years.",
+    "Worked example (checked): Σμ = 6.0 crashes in 3 years, k = 0.5, N_obs = 12. w = 1/(1 + 0.5 × 6) = 0.25. N_exp = 0.25 × 6 + 0.75 × 12 = 10.5 crashes, i.e. 3.5 per year instead of the raw 4.0.",
+    "Reading the weight: large k (counts are noisy) or a large Σμ (much expected exposure) pushes w down, so you trust the site's own record more. That is not intuitive at first; you will derive why in Task 2.",
+    "Application: rank sites by N_exp − Σμ (excess expected crashes), not by raw counts. For before/after studies, EB corrects the RTM bias that makes almost any treatment look effective at a site chosen after a bad year.",
+    "Limitation: EB is only as good as the SPF; an SPF from another state needs a local calibration factor. Simpler alternative: for quick screening, crash rate per million entering vehicles is acceptable if you say it ignores RTM."
+   ]
+  },
+  {
+   "title": "Understand 3 · User equilibrium and the relative gap as a verifier",
+   "paragraphs": [
+    "Intuition: at equilibrium every used route between an origin and destination takes the same time, and no unused route is faster.",
+    "Worked example (checked): 1000 veh/h, route 1 time t1 = 10 + 0.01·x1 min, route 2 time t2 = 15 + 0.005·x2 min. Setting t1 = t2 with x1 + x2 = 1000 gives 0.015·x1 = 10, so x1 ≈ 666.7, x2 ≈ 333.3, and both routes take ≈ 16.67 min. Relative gap = 0.",
+    "Off-equilibrium check: x1 = 800, x2 = 200 gives t1 = 18, t2 = 16. Total time = 800·18 + 200·16 = 17,600 veh·min; demand × shortest = 1000·16 = 16,000; gap = 1,600 / 17,600 ≈ 0.091.",
+    "Why a verifier loves this: the gap can be recomputed from link flows and travel-time functions alone, without trusting whatever produced the flows, including an LLM.",
+    "Limitation: a zero gap proves equilibrium for the network you were given, not that the network edit was the one the planner asked for. That second check needs a spec of the intended edit."
+   ]
+  },
+  {
+   "title": "Task 1 · Coding: Verified Physics Residual Lab (20 pts · 2.5 h · P3/P4)",
+   "paragraphs": [
+    "Build it in Python with NumPy (and Matplotlib for one plot). Fixed seeds 0–9; sample sizes n ∈ {10, 50}; noise σ ∈ {0.01, 0.1}; points xᵢ uniform on [0, 1] from the seeded generator.",
+    "Deliverables: (a) fit.py estimates â by least squares and writes results.csv (seed, n, σ, â, data MSE, residual MSE on a 1,001-point grid, boundary error); (b) baseline.py solves u'' = f with u(0) = u(1) = 0 by second-order finite differences on 101 points and reports max error against u*; (c) verify.py independently recomputes every metric from the saved inputs and prints PASS / FAIL / UNKNOWN per row; (d) one plot of â error versus n and σ.",
+    "Deliberate failure cases verify.py must handle: a row where you edit â by hand (FAIL); a missing input file (UNKNOWN); a design where every xᵢ is in {0, 1/3, 2/3, 1}, so Σφᵢ² = 0 and â is undefined (UNKNOWN, not a crash or a number).",
+    "Acceptance: mean â within 2 standard errors of 0.25 for every (n, σ); verifier verdicts correct on all three failure cases; finite-difference max error below 1e-3; README states exactly what was run."
+   ],
+   "code": "# skeleton — fill in, do not just run\nimport numpy as np\n\ndef design(seed, n):\n    return np.sort(np.random.default_rng(seed).uniform(0, 1, n))\n\ndef a_hat(x, y):\n    phi = np.sin(3 * np.pi * x)\n    denom = np.sum(phi ** 2)\n    if denom < 1e-12:\n        return None  # undefined: the verifier should say UNKNOWN\n    return np.sum(phi * (y - np.sin(np.pi * x))) / denom"
+  },
+  {
+   "title": "Task 2 · Derivation (20 pts · 1.0 h · P1)",
+   "bullets": [
+    "(a) Show that â is unbiased and that Var(â) = σ² / Σφᵢ² when εᵢ are independent with variance σ². State every assumption. Then say what happens to Var(â) when points cluster near x = 1/3.",
+    "(b) Assume a site's true mean m has a gamma prior with mean Σμ and variance k·(Σμ)², and N_obs given m is Poisson. Show that the posterior mean is w·Σμ + (1 − w)·N_obs and find w. Explain in two sentences why larger k lowers w.",
+    "(c) Interpretation: name one real situation where the gamma-Poisson assumption breaks for crash data, and what it would do to EB rankings."
+   ]
+  },
+  {
+   "title": "Task 3 · Paper reading (10 pts · 1.25 h · P1/P5)",
+   "paragraphs": [
+    "Read arXiv 2610.16140, LLM-assisted planning with a differentiable user-equilibrium layer [S9]. ROOM only saw its abstract, so check everything against the paper itself."
+   ],
+   "bullets": [
+    "Hypothesis: what exactly do the authors claim the LLM + UE layer enables?",
+    "Method: what does the differentiable layer let them do that a normal AequilibraE run cannot?",
+    "Strongest evidence and weakest evidence, with section numbers.",
+    "Missing control: what experiment would show the LLM's edits were correct, not just that the solver converged?",
+    "Transfer: how would you test this on a Florida MPO network, and what would P5 object to?"
+   ]
+  },
+  {
+   "title": "Task 4 · Customer discovery (part of Communication · 0.5 h · P2)",
+   "paragraphs": [
+    "Write 5 interview questions for a city engineer whose city won an SS4A award [S1]. Rules: ask about their last real experience (for example 'Walk me through how you chose the locations in your application'), never pitch a product, and include one question about who pays for evaluation and how it is procured."
+   ]
+  },
+  {
+   "title": "Task 5 · Writing (part of Communication · 1.5 h · all mentors)",
+   "paragraphs": [
+    "Write 500–800 words in your own words, Medium style. Suggested title: 'The most dangerous intersection on your list probably isn't'.",
+    "Include one original plot from a tiny simulation: 200 sites with the same true crash rate (Poisson, mean 3 per year, fixed seed); pick the 10 worst in year 1; show their year-2 counts. Explain what this means for a city choosing SS4A projects. Label the data synthetic."
+   ]
+  },
+  {
+   "title": "Task 6 · Oral quiz, written answers (Terminology 15 + Concepts 25 · 0.5 h)",
+   "bullets": [
+    "Why can a model have low data MSE and high physics residual? Give a traffic example.",
+    "In EB, what does the SPF represent, and what goes wrong if it comes from another state uncalibrated?",
+    "A countermeasure was installed at the 10 sites with the most crashes last year, and crashes fell 30%. List two reasons this may not be the countermeasure's effect.",
+    "What does a relative gap of 0.02 mean in words?",
+    "Design an experiment that could refute this claim: 'Our LLM planning assistant never makes wrong network edits.' Include the metric and what result would refute it.",
+    "Define CMF and give a value that would mean a countermeasure increases crashes."
+   ]
+  },
+  {
+   "title": "Task 7 · Shared room problem (Concepts · 0.5 h)",
+   "paragraphs": [
+    "The room's design question: an LLM assistant edits a regional planning model on request and runs assignment. Each mentor's requirement: P1 wants a falsifiable accuracy test; P2 wants planners to save real hours; P3 wants every edit independently verified; P4 wants it cheap enough to run per request on a laptop; P5 wants outputs in the units an MPO board understands. Write one page: where these requirements conflict, what you would build first, and why."
+   ]
+  },
+  {
+   "title": "Time budget",
+   "table": {
+    "headers": [
+     "Block",
+     "Hours"
+    ],
+    "rows": [
+     [
+      "Read the three Understand sections",
+      "1.0"
+     ],
+     [
+      "Task 1 coding (including setup)",
+      "2.5"
+     ],
+     [
+      "Task 2 derivation",
+      "1.0"
+     ],
+     [
+      "Task 3 paper reading",
+      "1.25"
+     ],
+     [
+      "Task 4 interview questions",
+      "0.5"
+     ],
+     [
+      "Task 5 writing with plot",
+      "1.5"
+     ],
+     [
+      "Task 6 quiz",
+      "0.5"
+     ],
+     [
+      "Task 7 room problem",
+      "0.5"
+     ],
+     [
+      "Retrieval checks (+1 day, +1 week)",
+      "0.25"
+     ],
+     [
+      "Total",
+      "9.0"
+     ],
+     [
+      "Stretch (optional, extra): replace â's single mode with a 3-mode correction and compare residual MSE",
+      "+1.5"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Checklist",
+   "checklist": [
+    "Read Understand 1–3",
+    "Task 1: fit.py, baseline.py, verify.py, plot, README",
+    "Task 1: three failure cases give FAIL / UNKNOWN / UNKNOWN",
+    "Task 2: derivations (a)–(c)",
+    "Task 3: reading answers with section numbers",
+    "Task 4: five interview questions",
+    "Task 5: draft or link with synthetic-data plot",
+    "Task 6: quiz answers",
+    "Task 7: one-page synthesis",
+    "Retrieval +1 day and +1 week done closed-book",
+    "Submit: /room grade with files or links"
+   ]
+  },
+  {
+   "title": "Retrieval checkpoints",
+   "bullets": [
+    "+1 day (Mon 2 Nov), closed book: write the EB formula, define w, and explain in two sentences why raw-count rankings mislead.",
+    "+1 week (Sun 8 Nov), closed book: derive R(x) for the Residual Lab model and state what a zero residual does and does not prove.",
+    "These are study-plan items; no reminders were scheduled."
+   ]
+  },
+  {
+   "title": "Hints",
+   "collapsible": true,
+   "solution": true,
+   "summary_label": "Show hints (try first)",
+   "bullets": [
+    "Task 2(a): write â − 0.25 as Σφᵢεᵢ / Σφᵢ²; expectations and variances of sums of independent terms do the rest.",
+    "Task 2(b): the gamma prior is conjugate to the Poisson; match the shape and rate parameters to mean Σμ and variance k·(Σμ)².",
+    "Task 1: keep verify.py ignorant of fit.py's internals; it should only read inputs, outputs and the formulas.",
+    "Task 5: with a fixed seed, the year-1 'worst 10' average will sit well above 3; their year-2 average should fall back near 3."
+   ]
+  },
+  {
+   "title": "Scoreboard",
+   "table": {
+    "headers": [
+     "Category",
+     "Points",
+     "Score"
+    ],
+    "rows": [
+     [
+      "Terminology",
+      "15",
+      "Not assessed"
+     ],
+     [
+      "Concepts",
+      "25",
+      "Not assessed"
+     ],
+     [
+      "Math / technical",
+      "20",
+      "Not assessed"
+     ],
+     [
+      "Coding / experiment",
+      "20",
+      "Not assessed"
+     ],
+     [
+      "Paper synthesis",
+      "10",
+      "Not assessed"
+     ],
+     [
+      "Communication",
+      "10",
+      "Not assessed"
+     ]
+    ]
+   }
+  }
+ ],
+ "sources": [
+  {
+   "id": "S1",
+   "title": "USDOT — Safe Streets and Roads for All (SS4A) Grant Program page",
+   "url": "https://www.transportation.gov/grants/SS4A",
+   "date": "lists FY26 awards dated 2026-10-30",
+   "note": "search-index excerpt; page not opened (host blocked)"
+  },
+  {
+   "id": "S9",
+   "title": "arXiv 2610.16140 — LLM Assisted Transportation Planning through a Differentiable User Equilibrium Layer",
+   "url": "https://arxiv.org/abs/2610.16140",
+   "date": "submitted 2026-10-12 (background)",
+   "note": "abstract-level via search index"
+  },
+  {
+   "id": "S11",
+   "title": "arXiv 2610.19442 — Traffic State Prediction and Control Using a Koopman Operator Framework with Polynomial Observables",
+   "url": "https://arxiv.org/abs/2610.19442",
+   "date": "October 2026; exact date unverified",
+   "note": "title and one-line description only"
+  },
+  {
+   "id": "N1",
+   "title": "ROOM project portfolio",
+   "path": "notebook/projects.md"
+  },
+  {
+   "id": "N3",
+   "title": "Learner profile",
+   "path": "notebook/learner-profile.md"
+  }
+ ]
+}

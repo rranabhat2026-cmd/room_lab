@@ -1,0 +1,387 @@
+{
+ "eyebrow": "WELCOME TO THE ROOM · Weekly briefing #1",
+ "title": "Weekly briefing — 1 Nov 2026",
+ "date": "As of Sun 2026-11-01 07:42 EST (America/New_York) · window 2026-10-25 07:42 to 2026-11-01 07:42 EST",
+ "summary": "Evidence status: PARTIAL. Primary sites (arxiv.org, transportation.gov, nhtsa.gov, openreview.net) were blocked from this run, so every item below rests on search-index excerpts, not opened pages. The week's most consequential transportation event is policy, not a paper: USDOT's FY26 Safe Streets and Roads for All round put about $1.013 billion into 297 safety awards [S1][S2], which creates a near-term need for honest crash-risk ranking and before/after evaluation. That strengthens a safety-analytics direction (Empirical Bayes vs ML) and gives the EvidenceOS idea a concrete transportation use: verifying LLM-driven planning tools [S9]. No research item in the 7-day window could be verified at abstract level, so no project is marked Threatened this week.",
+ "notice": "First calibration: there is no earlier briefing to compare against [N1]. P# marks a persona's view, not evidence. All mentor content is simulated in labeled passes, not separate models.",
+ "sections": [
+  {
+   "title": "Evidence radar",
+   "paragraphs": [
+    "Relevance-selected, not a representative survey. Status labels: news, agency, preprint. 'Background' means outside the 7-day window but useful context."
+   ],
+   "table": {
+    "headers": [
+     "Item",
+     "Date",
+     "Status",
+     "Key reported finding",
+     "Main limitation",
+     "ROOM project"
+    ],
+    "rows": [
+     [
+      "SS4A FY26 awards [S1][S2][S3]",
+      "Oct 29–30 (sources differ)",
+      "Agency",
+      "297 awards totaling $1,012,969,919: 197 planning/demonstration and 100 implementation grants; USDOT reports 52% benefit rural communities; 10 projects touch truck parking.",
+      "Excerpts only; project list not inspected; future rounds depend on reauthorization (status not verified here).",
+      "Safety analytics; bicycle GIS context"
+     ],
+     [
+      "NHTSA tire safety negotiated rulemaking committee [S4][S5]",
+      "~Oct 26",
+      "Agency notice",
+      "NHTSA intends to form an advisory committee (up to 18 members per secondary reports) to modernize tire standards, described as the first major overhaul in 20+ years.",
+      "Secondary reports for membership and comment window; Federal Register text not opened.",
+      "Watch only"
+     ],
+     [
+      "Waymo × Toyota bZ4X robotaxi platform [S6]",
+      "Oct 30",
+      "News",
+      "Waymo will test self-driving Toyota bZ4X vehicles in Japan next year; partnership also covers UK robotaxi operations.",
+      "Company announcement; no performance data.",
+      "CAV context"
+     ],
+     [
+      "Tesla Robotaxi Houston geofence [S7][S8]",
+      "Oct 26 (S8: Oct 23)",
+      "News",
+      "Third-party tracker puts the new Houston zone near 254 sq mi served by about 34 driverless vehicles; Tesla self-reports 3.1M autonomous miles through Oct 18.",
+      "Tracker counts and company-reported safety data, not independent measurement.",
+      "CAV context"
+     ],
+     [
+      "October arXiv traffic batch [S11][S12][S13]",
+      "October; dates unverified",
+      "Preprints",
+      "Koopman-operator freeway prediction and ramp-metering control; 2-D macroscopic model calibration on real data; GNN-guided network reduction for centralized routing.",
+      "Only titles and one-line descriptions seen; may fall outside the window.",
+      "Traffic-flow PIML; GNN"
+     ],
+     [
+      "LLM + differentiable user-equilibrium planning [S9]",
+      "Oct 12 (background)",
+      "Preprint",
+      "LLM connected through an MCP interface to AequilibraE with a differentiable UE assignment layer so non-specialists can run planning scenarios in natural language.",
+      "Abstract-level; no read of evaluation design.",
+      "EvidenceOS; ClaimLedger"
+     ],
+     [
+      "LLM-drafted work-zone Transportation Management Plans, WisDOT [S10]",
+      "October (background)",
+      "Preprint",
+      "Framework to automate TMP content using the WisTMP system; abstract reports limited gains from scaling 7B/8B to 14B models.",
+      "Abstract-level; single-agency case study.",
+      "EvidenceOS"
+     ],
+     [
+      "Model-release trackers (e.g. 'DeepSeek V4.1, Oct 29') [S16]",
+      "Claimed Oct 28–29",
+      "Unverified",
+      "Aggregator sites list several late-October model releases.",
+      "Could not confirm against any official source; one tracker contradicts itself. Excluded from analysis.",
+      "None"
+     ]
+    ],
+    "searchable": true
+   }
+  },
+  {
+   "title": "Transportation integration",
+   "paragraphs": [
+    "Three items developed fully; the rest get one line. Verdicts: Try now / Watch / Not for transportation yet.",
+    "1 · SS4A FY26 awards → safety analysis. The advance: about $1.013B across 297 awards, 100 of them implementation grants [S1]. Problem it changes: hundreds of agencies must now rank locations and later show that countermeasures worked, and the default practice of ranking by raw crash counts overstates sites that had an unlucky year (regression to the mean). Mechanism: Empirical Bayes (HSM Part B) shrinks each site's observed count toward a safety-performance-function prediction, weighted by how reliable each is. Simplest credible test: Florida intersections in Palm Beach County (crash records through a Florida crash data portal such as Signal Four Analytics, if your university access allows), split by years (rank on 2021–2023, evaluate on 2024–2025); baselines: raw counts (required), EB with a published SPF, then a gradient-boosted model; metric: how many of the top-20 sites stay in the top 20 out of sample, and the Poisson log-likelihood of future counts. Effort: about 15–20 hours once data access works. What could make it fail: access or geocoding quality, SPFs not calibrated to Florida, too few years. Who cares: cities that just won awards, their consultants, FDOT safety offices. Verdict: Try now.",
+    "2 · Tool-using LLMs driving planning engines → verified planning. The advance: an LLM edits and runs an equilibrium assignment through a tool interface [S9]; a DOT case study drafts work-zone plans [S10]. Problem: an agency cannot trust a scenario if nobody checks that the edit the LLM made is the edit the planner asked for. Mechanism: Wardrop user equilibrium has an independent optimality check, the relative gap, so a separate verifier can recompute it and confirm link changes against the request (PASS / FAIL / UNKNOWN). Simplest credible test: the Sioux Falls benchmark network in AequilibraE; 30 natural-language scenario requests with known correct edits; inject 10 corrupted edits (wrong link, wrong direction, capacity units). Baseline: LLM with no verifier. Metric: corrupted-edit catch rate and false alarms, plus relative gap below 1e-4 on accepted runs. Effort: about 20 hours. What could make it fail: requests too ambiguous to define a correct edit; verifier only as good as its spec. Who cares: MPO modelers, planning software vendors. Verdict: Try now; it is also the cleanest transportation home for EvidenceOS.",
+    "3 · Koopman-operator prediction and ramp metering → freeway control [S11], with 2-D model calibration as related context [S12]. The advance (title-level only): lifting nonlinear traffic dynamics into polynomial observables where they evolve approximately linearly, so linear prediction and control become available. Problem: model predictive ramp metering needs a model that is fast and good enough; first-principles LWR/CTM models need calibration, while deep models are opaque. Mechanism: LWR conservation ∂ρ/∂t + ∂(ρ·v(ρ))/∂x = 0 is nonlinear; EDMD fits a linear operator on chosen observables (ρ, ρ², …), and the truncation error depends on how well those observables close the dynamics. Simplest credible test: a cell-transmission-model freeway with one on-ramp and an incident scenario; compare EDMD-with-control against persistence and an ARX model for 5–15 minute prediction, then Koopman-MPC against ALINEA (the standard local feedback metering law) on total delay. Effort: about 25 hours; builds directly on the Verified Physics Residual Lab. What could make it fail: the observables do not capture shock formation; gains disappear under a misspecified (incident) regime. Verdict: Watch; read the paper before investing, but schedule it as your PIML bridge project.",
+    "One-liners: Waymo × Toyota [S6]: international fleet scaling, no direct research action, Watch. Tesla Houston [S7]: service area per vehicle is a measurable question (coverage vs wait time) for cities regulating AV fleets, Watch. NHTSA tire committee [S4]: no credible research link for you yet. DriveWorld3D generative driving simulation [S14]: background, Watch for AV testing. Graph forecasting robustness with a physics-informed detector [S15]: background; relevant if your GNN work faces sensor attacks or faults."
+   ]
+  },
+  {
+   "title": "Accepted-paper notes",
+   "paragraphs": [
+    "No top-venue decisions or proceedings were verified inside this window, and OpenReview was unreachable, so this section is empty by design rather than padded. A 'submitted to' line in a preprint is not acceptance."
+   ]
+  },
+  {
+   "title": "Mentor calibration",
+   "paragraphs": [
+    "Belief revisions: none possible this week; this is the first calibration, with no prior positions in the notebook to compare against [N2].",
+    "P1 · MIT professor. Worldview update: this week's strongest signal is a measurement problem, not a model: SS4A money flows to sites chosen by crash history, which is exactly where regression to the mean fools people [S1]. Terms: Empirical Bayes; safety performance function (SPF); negative binomial overdispersion k; regression to the mean; Koopman operator and EDMD; Wardrop equilibrium; relative gap; identifiability. Deprioritize: chasing new graph-transformer variants on the same benchmark sensors. Hard question: if raw-count and EB rankings disagree on 30% of the top-20 sites, what experiment decides which list is right? Warning: none of this week's October traffic preprints was read beyond titles; do not cite them in a proposal until you have read them.",
+    "P2 · Stanford PhD entrepreneur. Worldview update: 297 award winners are 297 buyers with deadlines and reporting duties [S1]. Terms: SS4A Action Plan; planning and demonstration vs implementation grants; Vision Zero; HSIP; on-call consultant contracts; procurement thresholds; before/after evaluation. Deprioritize: robotaxi-adjacent startup ideas; capital-heavy and dominated by fleets [S6][S7]. Hard question: who at a 50,000-person city signs for safety analytics, and what are they paying today? Warning: never build a business on one grant program whose continuation you have not verified.",
+    "P3 · OpenAI industry expert. Worldview update: LLMs are being wired straight into planning engines [S9][S10]; the missing layer is independent verification of what the model changed. Terms: tool calling; MCP; AequilibraE; differentiable optimization layer; spec-to-test; PASS/FAIL/UNKNOWN verdicts; prompt injection through documents. Deprioritize: LLM-written plans with no solver or checker in the loop. Hard question: design a test that catches an LLM that silently changes capacity on the wrong link. Warning: the WisDOT abstract's limited gains from 7B/8B to 14B hint that structure and retrieval matter more than size; verify before you rely on it [S10].",
+    "P4 · DeepSeek industry expert. Worldview update: the model-release trackers were noise this week; the 'DeepSeek V4.1, Oct 29' listing could not be confirmed anywhere official [S16]. Meanwhile Koopman-style linear models are cheap enough to run in a signal cabinet [S11]. Terms: EDMD with control; inference latency; memory footprint; quantization; edge deployment; cost per prediction; benchmark contamination. Deprioritize: GPU-heavy spatio-temporal transformers for corridors with a few hundred sensors. Hard question: what latency and memory budget does a ramp-meter controller have, and which model fits it? Warning: aggregator sites list releases labs never announced; verify before reacting.",
+    "P5 · Transportation systems practitioner. Worldview update: implementation grants mean real countermeasures, and agencies will need defensible evaluations in HSM terms [S1]. Terms: HSM Part B and C; SPF calibration factor; crash modification factor (CMF) and its standard error; CMF Clearinghouse; systemic safety; ALINEA; TSMO. Deprioritize: methods that need vehicle trajectories agencies do not collect. Hard question: an agency built a roundabout; you have 3 years before and 1 year after; how do you estimate its effect honestly? Warning: if an AI method cannot output expected crashes per year with uncertainty, an agency cannot use it.",
+    "Synthesis. Agreements: every mentor wants a classical baseline and an independent check before any claim. Real disagreements: P2 wants to move on SS4A tooling now while the money is fresh; P1 wants you to master EB and evaluation design first. Resolution for this week: learn EB now (it serves both), postpone product work until customer interviews. P3 sees LLM-driven planning as the opportunity; P4 thinks small linear models are the deployable win; both can be tested cheaply and neither should be assumed. Open questions: does ML beat EB out of sample on Florida data? Can a verifier catch realistic LLM edit errors? Do Koopman models survive incident regimes?"
+   ]
+  },
+  {
+   "title": "Opportunities",
+   "table": {
+    "headers": [
+     "Type",
+     "Opportunity",
+     "Gap and closest prior art",
+     "Cheapest test",
+     "Success / failure",
+     "Main risk"
+    ],
+    "rows": [
+     [
+      "Research",
+      "EB vs ML hotspot ranking with honest uncertainty",
+      "HSM EB is standard practice; whether ML improves out-of-sample ranking on Florida data is not established within this search.",
+      "Rank on 2021–23, evaluate on 2024–25, Palm Beach intersections.",
+      "Top-20 retention and future-count log-likelihood beat EB / do not.",
+      "Data access and geocoding."
+     ],
+     [
+      "Research",
+      "Verified LLM-driven planning",
+      "Tool-using LLM planning exists [S9]; an independent edit verifier with measured catch rates was not found within this search.",
+      "Sioux Falls, 30 requests, 10 injected corrupt edits.",
+      "Catch rate ≥ 90% with < 10% false alarms / below.",
+      "Defining 'correct edit' for vague requests."
+     ],
+     [
+      "Research",
+      "Koopman ramp metering under misspecification",
+      "Koopman traffic control exists [S11]; robustness to incidents vs ALINEA is the testable gap (unverified until read).",
+      "CTM corridor with and without incidents.",
+      "Delay reduction over ALINEA holds under incidents / vanishes.",
+      "Paper may already test this."
+     ],
+     [
+      "Practice",
+      "Before/after evaluation service for small SS4A cities",
+      "Consultants do this case by case; standardized EB before/after with transparent reports is the wedge.",
+      "Interview 5 city or county engineers with awards [S1].",
+      "3 of 5 describe a paid evaluation need / none.",
+      "Procurement rules; grant-program continuity."
+     ],
+     [
+      "Practice",
+      "Safety action plan evidence ledger",
+      "Plans list countermeasures; tying each to a CMF source and its uncertainty is ClaimLedger applied.",
+      "Audit one public action plan by hand.",
+      "Most claims traceable to CMFs / plan has no citations to audit.",
+      "Low willingness to pay."
+     ],
+     [
+      "Practice",
+      "AV service-area analytics for cities",
+      "Fleets publish geofences, not service quality; coverage-per-vehicle metrics are absent from public reporting [S7].",
+      "Compute coverage per vehicle from public geofence maps.",
+      "A city regulator wants the metric / no interest.",
+      "Data volatility; Watch only."
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Project status",
+   "paragraphs": [
+    "Updated in notebook/projects.md [N1]. Novelty is a hypothesis until prior art is read."
+   ],
+   "table": {
+    "headers": [
+     "Project",
+     "Status",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Traffic-flow PIML (LWR / PINN)",
+      "Refine",
+      "Koopman/EDMD control offers a concrete bridge from the Residual Lab to freeway control [S11]; paper unread."
+     ],
+     [
+      "Bicycle GIS analysis (Boca Raton)",
+      "Watch",
+      "SS4A context strengthens safety framing [S1]; keep the project separate and unchanged."
+     ],
+     [
+      "FDOT CBAM cybersecurity review",
+      "Not reviewed",
+      "No new evidence this week."
+     ],
+     [
+      "Transportation GNN work",
+      "Watch",
+      "New graph forecasting and routing preprints appeared but were not read [S13][S15]."
+     ],
+     [
+      "EvidenceOS / proof-carrying agents",
+      "Refine",
+      "Found a transportation home: verifying LLM edits to planning models [S9][S10]."
+     ],
+     [
+      "ClaimLedger",
+      "Refine",
+      "Safety action plans as a concrete claim-to-CMF audit target."
+     ],
+     [
+      "ReplayLab, PDEGym, world models, memory, multi-timescale agents",
+      "Not reviewed",
+      "No consequential evidence this week; world-model simulation for AVs noted as background [S14]."
+     ],
+     [
+      "Verified Physics Residual Lab",
+      "Assigned",
+      "This week's coding task."
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Training handoff",
+   "bullets": [
+    "Verified Physics Residual Lab, with a verifier and a deliberate failure case (P1, P3).",
+    "Empirical Bayes and regression to the mean, the core of honest safety ranking (P1, P5).",
+    "Wardrop user equilibrium and the relative gap as an independent check on LLM-driven planning (P3).",
+    "First customer-discovery questions for SS4A awardees (P2).",
+    "Explore later: Koopman operators and EDMD (P4), after the Residual Lab."
+   ]
+  },
+  {
+   "title": "Run notes",
+   "bullets": [
+    "Blocked hosts (proxy 403): arxiv.org, export.arxiv.org, transportation.gov, highways.dot.gov, nhtsa.gov, openreview.net, techcrunch.com. Search ran through the search tool only.",
+    "Arithmetic in the training pack was recomputed with Python.",
+    "No scheduled reminders were created; retrieval checkpoints are study-plan items."
+   ],
+   "collapsible": true,
+   "summary_label": "How this briefing was produced"
+  }
+ ],
+ "sources": [
+  {
+   "id": "S1",
+   "title": "USDOT — Safe Streets and Roads for All (SS4A) Grant Program page",
+   "url": "https://www.transportation.gov/grants/SS4A",
+   "date": "lists FY26 awards dated 2026-10-30",
+   "note": "search-index excerpt; page not opened (host blocked)"
+  },
+  {
+   "id": "S2",
+   "title": "FHWA newsroom — Duffy invests $1.01 billion to build safer roads in all 50 states",
+   "url": "https://highways.dot.gov/newsroom/trumps-transportation-secretary-sean-p-duffy-invests-1-billion-build-safer-roads",
+   "date": "2026-10-29/30 (sources differ)",
+   "note": "search-index excerpt; page not opened"
+  },
+  {
+   "id": "S3",
+   "title": "TheTrucker — Truck parking included in $1 billion federal road safety awards",
+   "url": "https://www.thetrucker.com/trucking-news/the-nation/truck-parking-included-in-1-billion-federal-road-safety-awards-but-details-on-new-spaces-unclear",
+   "date": "2026-10-29/30",
+   "note": "secondary; search-index excerpt"
+  },
+  {
+   "id": "S4",
+   "title": "Federal Register public inspection 2026-21889 — NHTSA intent to form Tire Safety Negotiated Rulemaking Advisory Committee (Docket NHTSA-2026-1717)",
+   "url": "https://public-inspection.federalregister.gov/2026-21889.pdf",
+   "date": "announced ~2026-10-26 (secondary sources)",
+   "note": "search-index excerpt; PDF not opened"
+  },
+  {
+   "id": "S5",
+   "title": "Holland & Knight — NHTSA Closes Out 2026 with Major AV, Tire and Recall Initiatives",
+   "url": "https://www.hklaw.com/en/insights/publications/2026/10/nhtsa-closes-out-2026-with-major-av-tire-and-recall-initiatives",
+   "date": "October 2026",
+   "note": "secondary law-firm summary; not opened"
+  },
+  {
+   "id": "S6",
+   "title": "TechCrunch — Waymo taps Toyota to supply robotaxis for Japan and the UK",
+   "url": "https://techcrunch.com/2026/10/30/waymos-next-robotaxi-will-be-a-toyota-bz4x-destined-for-japan-and-the-uk",
+   "date": "2026-10-30",
+   "note": "news; search-index excerpt"
+  },
+  {
+   "id": "S7",
+   "title": "Electrek — Tesla Robotaxi Houston geofence expansion",
+   "url": "https://electrek.co/2026/10/26/tesla-robotaxi-houston-geofence-expansion-shape/",
+   "date": "2026-10-26",
+   "note": "news citing a third-party tracker count"
+  },
+  {
+   "id": "S8",
+   "title": "Tesla Oracle — Tesla announces Robotaxi launch in four more cities, releases safety data",
+   "url": "https://www.teslaoracle.com/2026/10/23/tesla-announces-robotaxi-launch-in-four-more-cities-releases-safety-data-via-new-website-no-kittens-were-hurt/",
+   "date": "2026-10-23 (just before window)",
+   "note": "fan site; company-reported figures"
+  },
+  {
+   "id": "S9",
+   "title": "arXiv 2610.16140 — LLM Assisted Transportation Planning through a Differentiable User Equilibrium Layer",
+   "url": "https://arxiv.org/abs/2610.16140",
+   "date": "submitted 2026-10-12 (background)",
+   "note": "abstract-level via search index"
+  },
+  {
+   "id": "S10",
+   "title": "arXiv 2610.10650 — LLM-Assisted Preparation of Transportation Management Plans: WisDOT WisTMP case study",
+   "url": "https://arxiv.org/abs/2610.10650",
+   "date": "October 2026, before window (background)",
+   "note": "abstract-level via search index"
+  },
+  {
+   "id": "S11",
+   "title": "arXiv 2610.19442 — Traffic State Prediction and Control Using a Koopman Operator Framework with Polynomial Observables",
+   "url": "https://arxiv.org/abs/2610.19442",
+   "date": "October 2026; exact date unverified",
+   "note": "title and one-line description only"
+  },
+  {
+   "id": "S12",
+   "title": "arXiv 2610.29557 — Data-driven calibration of a two-dimensional traffic flow model",
+   "url": "https://arxiv.org/abs/2610.29557",
+   "date": "October 2026; exact date unverified",
+   "note": "title and one-line description only"
+  },
+  {
+   "id": "S13",
+   "title": "arXiv 2610.36981 — GNN-Guided Network Reduction for Centralized Urban Traffic Routing",
+   "url": "https://arxiv.org/abs/2610.36981",
+   "date": "October 2026; exact date unverified",
+   "note": "title only"
+  },
+  {
+   "id": "S14",
+   "title": "arXiv 2610.22450 — DriveWorld3D: Evidence-Constrained 3D World Modeling and Generative Simulation for Autonomous Driving",
+   "url": "https://arxiv.org/abs/2610.22450",
+   "date": "posted 2026-10-15 (background)",
+   "note": "abstract-level via search index"
+  },
+  {
+   "id": "S15",
+   "title": "arXiv 2607.27604 — Revisiting the Adversarial Robustness of Graph-Based Traffic Forecasting",
+   "url": "https://arxiv.org/abs/2607.27604",
+   "date": "July 2026 (background)",
+   "note": "abstract-level via search index"
+  },
+  {
+   "id": "S16",
+   "title": "DataLearner — DeepSeek V4.1 model page",
+   "url": "https://www.datalearner.com/en/ai-models/pretrained-models/deepseek-v4-1",
+   "date": "accessed 2026-11-01",
+   "note": "used only to show the 'Oct 29 release' tracker claim is unconfirmed"
+  },
+  {
+   "id": "N1",
+   "title": "ROOM project portfolio",
+   "path": "notebook/projects.md"
+  },
+  {
+   "id": "N2",
+   "title": "ROOM roster (P1–P5 active)",
+   "path": "notebook/roster.yaml"
+  },
+  {
+   "id": "N3",
+   "title": "Learner profile",
+   "path": "notebook/learner-profile.md"
+  }
+ ]
+}
