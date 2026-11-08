@@ -2,13 +2,13 @@
  "eyebrow": "WELCOME TO THE ROOM · Weekly briefing #2",
  "title": "Weekly briefing — 8 Nov 2026",
  "date": "As of Sun 2026-11-08 07:42 EST (America/New_York) · window 2026-11-01 07:42 to 2026-11-08 07:42 EST",
- "summary": "Evidence status: PARTIAL again. Primary sites are still blocked from this environment, but this week three transportation preprints fall inside the window (Nov 2, 4, 5) at abstract-excerpt level [S1][S2][S3]. The most useful for you is a physics-constrained influence-function method that asks which training data drive a network model's estimates [S1]: it strengthens the verification thread running through your Residual Lab and traffic PIML work. Signal control is the other theme: a max-pressure review [S3] and a vision-language signal controller that reportedly only matches a structured-state controller [S2], which supports last week's view that cheap, structured models are the deployable baseline [N1]. No submissions arrived for pack #1, so this week's training carries its core tasks forward [N2].",
+ "summary": "Evidence status: PARTIAL. Primary sites were blocked at the start of this run; once access was added mid-run, three transportation preprints inside the window (Nov 2, 4, 5) were confirmed on arXiv at abstract level [S1][S2][S3]; agency and news items still rest on search excerpts. The most useful for you is a physics-constrained influence-function method that asks which training data drive a network model's estimates [S1]: it strengthens the verification thread running through your Residual Lab and traffic PIML work. Signal control is the other theme: a max-pressure review [S3] and a vision-language signal controller that reportedly only matches a structured-state controller [S2], which supports last week's view that cheap, structured models are the deployable baseline [N1]. No submissions arrived for pack #1, so this week's training carries its core tasks forward [N2].",
  "notice": "Second calibration; belief changes are judged against briefing #1 [N1]. P# marks a persona's view, not evidence. Mentor content is simulated in labeled passes.",
  "sections": [
   {
    "title": "What changed since last week",
    "bullets": [
-    "Sources still blocked (arxiv.org, transportation.gov, highways.dot.gov, nhtsa.gov, openreview.net); the network setting has not been changed yet.",
+    "Source access: arxiv.org, export.arxiv.org, openreview.net, www.transportation.gov, highways.dot.gov and www.nhtsa.gov were added to the environment's allowed hosts during this run; agency items below were still checked through search excerpts only.",
     "No submissions for training pack #1 [N2]; nothing is graded, and no skill is marked demonstrated.",
     "Last week's open questions (does ML beat EB on Florida data? can a verifier catch LLM edit errors? do Koopman models survive incidents?) remain open; no new evidence bears on them."
    ]
@@ -16,7 +16,7 @@
   {
    "title": "Evidence radar",
    "paragraphs": [
-    "Relevance-selected, not a representative survey. Dates are as stated in search excerpts; none of the pages were opened."
+    "Relevance-selected, not a representative survey. The three preprints were confirmed on arXiv (abstract read); agency and news items rest on search excerpts."
    ],
    "table": {
     "headers": [
@@ -33,7 +33,7 @@
       "Nov 5",
       "Preprint",
       "Influence of each training example is characterized inside the physically feasible space set by network constraints, which standard influence functions ignore.",
-      "Abstract excerpt only; datasets, scale and evaluation unknown.",
+      "Abstract read; full text not read; datasets, scale and evaluation unknown.",
       "Traffic-flow PIML; EvidenceOS"
      ],
      [
@@ -49,7 +49,7 @@
       "Nov 2",
       "Preprint (review)",
       "Surveys how the pressure definition has evolved and how max-pressure has been extended toward real deployments.",
-      "Review; abstract excerpt only.",
+      "Review; abstract read; full text not read.",
       "Signal control (learning)"
      ],
      [
@@ -113,7 +113,7 @@
   {
    "title": "Mentor calibration",
    "paragraphs": [
-    "P1 · MIT professor. Worldview update: influence functions give a falsifiable question, 'would removing this detector change the estimate?', which can be checked exactly by refitting [S1]. Terms: influence function; Hessian-vector product; leave-one-out; constrained optimization (KKT conditions); feasible set; throughput optimality; stability region. Belief vs last week: unchanged; insisting on exact checks (leave-one-out, relative gap) still holds [N1]. Deprioritize: interpreting influence scores without the leave-one-out check. Hard question: under what conditions does the first-order influence approximation fail, and how would you detect that on traffic data? Warning: three preprints known only from excerpts are not evidence you can build on yet.",
+    "P1 · MIT professor. Worldview update: influence functions give a falsifiable question, 'would removing this detector change the estimate?', which can be checked exactly by refitting [S1]. Terms: influence function; Hessian-vector product; leave-one-out; constrained optimization (KKT conditions); feasible set; throughput optimality; stability region. Belief vs last week: unchanged; insisting on exact checks (leave-one-out, relative gap) still holds [N1]. Deprioritize: interpreting influence scores without the leave-one-out check. Hard question: under what conditions does the first-order influence approximation fail, and how would you detect that on traffic data? Warning: three preprints read only at abstract level are not evidence you can build on yet.",
     "P2 · Stanford PhD entrepreneur. Worldview update: detector health is a recurring, budgeted problem for every traffic management center; that is a more durable wedge than one grant cycle [S1]. Terms: TMC; detector health monitoring; maintenance work orders; data quality SLA; procurement through ITS maintenance contracts. Belief vs last week: shifted slightly from 'SS4A awardees first' toward 'TMC data quality first', because the buyer is recurring; still untested without interviews. Deprioritize: VLM signal products [S2]; each intersection needs cameras and compute. Hard question: what does a TMC currently spend to find and fix a bad detector? Warning: you have not done a single interview yet; both wedges are guesses.",
     "P3 · OpenAI industry expert. Worldview update: Traffic-VL is an agent acting on infrastructure from pixels [S2]; the safety question is what checks sit between its output and the controller. Terms: action constraints; minimum green and pedestrian clearance as hard rules; fallback controller; monitoring; reward hacking in simulation; sim-to-real gap. Belief vs last week: unchanged that verification is the missing layer; extended from planning models to live control. Deprioritize: end-to-end controllers without a rule-based safety shell. Hard question: design a runtime monitor that would catch a learned controller starving a minor approach. Warning: reported wins over general VLMs say little about safety under rare events.",
     "P4 · DeepSeek industry expert. Worldview update: a VLM matching a structured-state model [S2] means images bought generality claims, not performance; per intersection cost matters. Terms: edge inference; frames per second; model size vs latency; cost per intersection; max-pressure compute cost (near zero); quantization. Belief vs last week: reinforced, not revised: cheap structured models stay the deployable baseline [N1]. Deprioritize: GPU-at-every-intersection designs. Hard question: estimate the yearly cost of running a VLM controller at 300 intersections versus max-pressure on existing controllers. Warning: matching a baseline is not beating it; check that compute budgets were equal.",
@@ -191,7 +191,7 @@
      [
       "Traffic-flow PIML (LWR / PINN)",
       "Refine",
-      "Physics-constrained influence [S1] adds a data-verification angle next to Koopman control; both unread beyond excerpts."
+      "Physics-constrained influence [S1] adds a data-verification angle next to Koopman control; both read at abstract level only."
      ],
      [
       "EvidenceOS / proof-carrying agents",
@@ -235,8 +235,8 @@
    "collapsible": true,
    "summary_label": "How this briefing was produced",
    "bullets": [
-    "Blocked hosts (proxy 403): arxiv.org, transportation.gov, openreview.net (tested again this run).",
-    "The three November preprints were found in one search listing with abstract excerpts and dates; targeted follow-up searches did not find them again, so treat them as unconfirmed until opened.",
+    "Blocked at start of run (proxy 403): arxiv.org, transportation.gov, openreview.net. Six source hosts were then added to the environment's allowlist and the three November preprints were verified through the arXiv API.",
+    "The three November preprints were confirmed on arXiv (IDs, titles, v1 dates, abstracts); full texts were not read.",
     "Excluded after checking dates: NHTSA Pathways to Safer Streets (April 2026) and USDOT's 52 deregulatory actions (May 2025).",
     "Max-pressure worked example recomputed with Python."
    ]
@@ -247,22 +247,22 @@
    "id": "S1",
    "title": "arXiv 2611.07526 — Understanding Data Influence in Transportation Networks: A Physics-Constrained Influence-Function Framework",
    "url": "https://arxiv.org/abs/2611.07526",
-   "date": "submitted 2026-11-05 (per search excerpt)",
-   "note": "abstract excerpt from one search result; page not opened; a second search could not find it"
+   "date": "v1 submitted 2026-11-05",
+   "note": "verified via arXiv API on 2026-11-08 (title, v1 date, abstract read); full text not read"
   },
   {
    "id": "S2",
    "title": "arXiv 2611.06353 — Traffic-VL: Reinforced Vision-Language Models for Generalizable End-to-End Traffic Signal Control",
    "url": "https://arxiv.org/abs/2611.06353",
-   "date": "submitted 2026-11-04 (per search excerpt)",
-   "note": "abstract excerpt only; a second search could not find it"
+   "date": "v1 submitted 2026-11-04",
+   "note": "verified via arXiv API on 2026-11-08 (title, v1 date, abstract read); full text not read"
   },
   {
    "id": "S3",
    "title": "arXiv 2611.04029 — A Review of Max-Pressure Traffic Signal Control Algorithms: State of the Art and Research Opportunities",
    "url": "https://arxiv.org/abs/2611.04029",
-   "date": "submitted 2026-11-02 (per search excerpt)",
-   "note": "abstract excerpt only"
+   "date": "v1 submitted 2026-11-02",
+   "note": "verified via arXiv API on 2026-11-08 (title, v1 date, abstract read); full text not read"
   },
   {
    "id": "S4",
