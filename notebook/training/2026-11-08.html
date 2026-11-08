@@ -1,0 +1,130 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training pack — week of 8 Nov 2026</title><style>
+:root{color-scheme:light;--bg:#f4f7f8;--card:#fff;--ink:#172a32;--muted:#53646c;--line:#d9e3e7;--accent:#086c65;--soft:#edf7f4;--th:#edf3f5;--pre:#f4f7f8}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1719;--card:#162124;--ink:#e3ecee;--muted:#9fb1b7;--line:#2a3a3f;--accent:#5cc8bd;--soft:#16302d;--th:#1d2b2f;--pre:#111b1e}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1719;--card:#162124;--ink:#e3ecee;--muted:#9fb1b7;--line:#2a3a3f;--accent:#5cc8bd;--soft:#16302d;--th:#1d2b2f;--pre:#111b1e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,sans-serif}
+main{max-width:1040px;margin:36px auto;padding:40px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700}
+h1{font-size:2.25rem;line-height:1.2;margin:12px 0}h2{font-size:1.35rem;line-height:1.35;margin:0 0 14px}
+p{margin:10px 0 16px}.meta{color:var(--muted);font-size:.88rem}.summary{font-size:1.12rem;font-weight:550}
+.notice{background:var(--soft);border-left:4px solid var(--accent);padding:12px 16px}
+nav{display:flex;gap:8px 16px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--line)}
+nav a{font-size:.88rem}a{color:var(--accent);text-underline-offset:3px;overflow-wrap:anywhere}
+section{padding:28px 0 6px;border-bottom:1px solid var(--line)}section:last-child{border:0}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.93rem;margin:14px 0}
+th,td{padding:11px 12px;text-align:left;border:1px solid var(--line);vertical-align:top}th{background:var(--th)}
+.filter{display:none;width:100%;max-width:360px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit}
+.js .filter{display:block}
+li{margin:7px 0}ul.checklist{list-style:none;padding-left:0}ul.checklist label{display:flex;gap:10px;align-items:flex-start}
+details{margin:14px 0;border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+summary{cursor:pointer;font-weight:650}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:.84rem/1.55 ui-monospace,monospace;background:var(--pre);padding:16px;border-radius:6px}
+.download{display:inline-block;padding:7px 12px;border:1px solid var(--accent);border-radius:6px;margin:6px 0}
+@media(max-width:650px){main{margin:0;padding:22px 16px;border:0;border-radius:0}h1{font-size:1.8rem}th,td{padding:8px}}
+@media print{body{background:white;color:black}main{margin:0;border:0;padding:0;max-width:none}nav,.download,.filter{display:none!important}section{break-inside:auto}h2{break-after:avoid}details.solution:not([open]){display:none}}
+</style></head><body><main>
+<header><div class="eyebrow">WELCOME TO THE ROOM · Training pack #2</div><h1>Training pack — week of 8 Nov 2026</h1>
+<p class="meta">Set Sun 2026-11-08 (America/New_York) · due Sat 2026-11-14 23:59 · budget 7.25 h</p><p class="summary">No work came in for pack #1, so this pack is lighter and carries its core forward: finish the Residual Lab and the Empirical Bayes derivation. One new idea is added, max-pressure signal control, because it is the most deployable method in this week&#x27;s briefing <a href="#S3">[S3]</a>. If you already started pack #1, submit what you have; partial work is graded on what it shows.</p>
+<p class="notice">Scores start Not assessed. Pack #1 tasks not listed here stay open as optional; nothing is penalized for being late.</p>
+</header><nav aria-label="Report sections">
+<a href="#section-1">This week&#x27;s focus</a>
+<a href="#section-2">Recognize</a>
+<a href="#section-3">Understand · Max-pressure in one intersection</a>
+<a href="#section-4">Task 1 · Coding: Residual Lab (carried over · 20 pts · 2.5 h · P3/P4)</a>
+<a href="#section-5">Task 2 · Math (20 pts · 1.75 h · P1/P5)</a>
+<a href="#section-6">Task 3 · Paper reading (10 pts · 1.0 h · P5)</a>
+<a href="#section-7">Task 4 · Customer discovery (Communication · 0.5 h · P2)</a>
+<a href="#section-8">Task 5 · Quiz, written answers (Terminology 15 + Concepts 25 · 0.5 h)</a>
+<a href="#section-9">Time budget</a>
+<a href="#section-10">Checklist</a>
+<a href="#section-11">Retrieval checkpoints</a>
+<a href="#section-12">Hints</a>
+<a href="#section-13">Scoreboard</a>
+<a href="#sources">Sources</a>
+</nav>
+<section id="section-1"><h2>This week&#x27;s focus</h2>
+<div class="table-wrap"><table id="table-1"><thead><tr><th scope="col">#</th><th scope="col">Skill</th><th scope="col">Owner</th><th scope="col">Tag</th><th scope="col">Observable objective</th></tr></thead><tbody>
+<tr><td>1</td><td>Verified Physics Residual Lab (carried over)</td><td>P1, P3</td><td>Learn now</td><td>Pack #1 Task 1 acceptance criteria, unchanged.</td></tr>
+<tr><td>2</td><td>Empirical Bayes derivation (carried over)</td><td>P1, P5</td><td>Learn now</td><td>Pack #1 Task 2 (a) and (b).</td></tr>
+<tr><td>3</td><td>Max-pressure signal control</td><td>P5, P1</td><td>Learn now</td><td>You compute phase pressures by hand, including a spillback case, and explain when max-pressure fails.</td></tr>
+<tr><td>4</td><td>Customer discovery (carried over)</td><td>P2</td><td>Practice next</td><td>Five interview questions; now aimed at a TMC detector-maintenance engineer or an SS4A city engineer, your choice.</td></tr>
+<tr><td>5</td><td>Physics-constrained influence functions</td><td>P1</td><td>Explore later</td><td>Not this week; next after the Residual Lab <a href="#S1">[S1]</a>.</td></tr>
+</tbody></table></div>
+</section>
+<section id="section-2"><h2>Recognize</h2>
+<ul><li>Max-pressure: choose the phase with the largest weighted sum of upstream minus downstream queues.</li><li>Saturation flow: the maximum discharge rate of a movement during green, in vehicles per hour of green.</li><li>Spillback: a downstream link fills up, so vehicles cannot leave the intersection even on green.</li><li>Actuated control: green times extend or end based on detector calls; the realistic baseline for any new controller.</li><li>Occupancy: fraction of time a loop detector is covered; not the same as queue length.</li><li>Influence function: first-order estimate of how a model changes when one training point is removed.</li></ul>
+</section>
+<section id="section-3"><h2>Understand · Max-pressure in one intersection</h2>
+<p>Intuition: give green to the movements that would move the most vehicles from a crowded place to an empty place. If the downstream link is full, sending vehicles there achieves nothing.</p>
+<p>Formulation: for a movement from link i to link j with saturation flow s, its weight is s × (q_i − q_j), where q is the queue. A phase&#x27;s pressure is the sum of its movements&#x27; weights. Max-pressure picks the phase with the largest pressure at each decision step.</p>
+<p>Worked example (checked; all s equal to 1): Phase A serves N→S with queue 12 (downstream queue 4) and S→N with queue 8 (downstream 6): pressure = (12 − 4) + (8 − 6) = 10. Phase B serves E→W with 10 (downstream 2) and W→E with 5 (downstream 9): pressure = (10 − 2) + (5 − 9) = 4. Choose Phase A.</p>
+<p>Notice the negative term: W→E pushes vehicles into a fuller link, so it lowers Phase B&#x27;s pressure. That is how max-pressure reacts to spillback without a network model.</p>
+<p>Why it matters: it is decentralized, needs only local measurements, and has a throughput-optimality result under its queueing assumptions <a href="#S3">[S3]</a>. Limitation: it needs queue lengths; most detectors report occupancy, and it ignores coordination and pedestrian phases unless added. Simpler alternative: well-tuned actuated control is often enough at isolated, under-saturated intersections.</p>
+</section>
+<section id="section-4"><h2>Task 1 · Coding: Residual Lab (carried over · 20 pts · 2.5 h · P3/P4)</h2>
+<p>Exactly as pack #1, Task 1: fit.py, baseline.py, verify.py, plot, README, and the three failure cases (FAIL / UNKNOWN / UNKNOWN). If time runs short, submit fit.py and verify.py first; they carry most of the points.</p>
+</section>
+<section id="section-5"><h2>Task 2 · Math (20 pts · 1.75 h · P1/P5)</h2>
+<ul><li>(a) Carried over: show â is unbiased with Var(â) = σ² / Σφᵢ².</li><li>(b) Carried over: derive the EB weight from the gamma-Poisson model.</li><li>(c) New: an intersection has Phase A (N→S: upstream 14, downstream 3, s = 1800; S→N: upstream 6, downstream 6, s = 1800) and Phase B (E→W: upstream 9, downstream 1, s = 1200; W→E: upstream 11, downstream 20, s = 1200). Compute both pressures and choose a phase. Then the E→W downstream link fills to 12: recompute and explain the change.</li><li>(d) New: give one situation where max-pressure&#x27;s choice is unsafe or unacceptable to an agency even though its pressure is highest.</li></ul>
+</section>
+<section id="section-6"><h2>Task 3 · Paper reading (10 pts · 1.0 h · P5)</h2>
+<p>Read the max-pressure review, arXiv 2611.04029 <a href="#S3">[S3]</a>. ROOM only saw its abstract excerpt; confirm everything against the paper.</p>
+<ul><li>What is the original throughput-optimality claim, and which assumptions does it need?</li><li>How has the pressure definition changed, and why?</li><li>Which extension addresses queues measured imperfectly (or occupancy only), if any?</li><li>One open problem the review lists that you could test in SUMO within 15 hours.</li></ul>
+</section>
+<section id="section-7"><h2>Task 4 · Customer discovery (Communication · 0.5 h · P2)</h2>
+<p>Five interview questions, no pitching. Choose your audience: a TMC or ITS maintenance engineer (detector health) or a city engineer with an SS4A award. Include one question on what they spend today.</p>
+</section>
+<section id="section-8"><h2>Task 5 · Quiz, written answers (Terminology 15 + Concepts 25 · 0.5 h)</h2>
+<ul><li>In one sentence each: saturation flow, spillback, occupancy, actuated control.</li><li>Why does a full downstream link lower a phase&#x27;s pressure, and why is that useful?</li><li>Why is fixed-time control a weak baseline for a new adaptive controller?</li><li>A vision-language controller matches a structured-state controller. What would you need to see before calling it better?</li><li>Design an experiment that could refute: &#x27;Max-pressure always beats actuated control.&#x27; State the metric and the result that would refute it.</li></ul>
+</section>
+<section id="section-9"><h2>Time budget</h2>
+<div class="table-wrap"><table id="table-9"><thead><tr><th scope="col">Block</th><th scope="col">Hours</th></tr></thead><tbody>
+<tr><td>Read the max-pressure section</td><td>0.5</td></tr>
+<tr><td>Task 1 coding (carried over)</td><td>2.5</td></tr>
+<tr><td>Task 2 math (a)–(d)</td><td>1.75</td></tr>
+<tr><td>Task 3 reading</td><td>1.0</td></tr>
+<tr><td>Task 4 interview questions</td><td>0.5</td></tr>
+<tr><td>Task 5 quiz</td><td>0.5</td></tr>
+<tr><td>Retrieval (+1 day, +1 week)</td><td>0.25</td></tr>
+<tr><td>Buffer for setup</td><td>0.25</td></tr>
+<tr><td>Total</td><td>7.25</td></tr>
+<tr><td>Optional from pack #1: article (Task 5) and room synthesis (Task 7)</td><td>+2.0</td></tr>
+</tbody></table></div>
+</section>
+<section id="section-10"><h2>Checklist</h2>
+<ul class="checklist"><li><label><input type="checkbox"> <span>Read the max-pressure section</span></label></li><li><label><input type="checkbox"> <span>Task 1: fit.py and verify.py (then baseline, plot, README)</span></label></li><li><label><input type="checkbox"> <span>Task 2 (a)–(d)</span></label></li><li><label><input type="checkbox"> <span>Task 3 reading answers</span></label></li><li><label><input type="checkbox"> <span>Task 4 five questions</span></label></li><li><label><input type="checkbox"> <span>Task 5 quiz</span></label></li><li><label><input type="checkbox"> <span>Retrieval +1 day and +1 week</span></label></li><li><label><input type="checkbox"> <span>Submit with /room grade</span></label></li></ul>
+</section>
+<section id="section-11"><h2>Retrieval checkpoints</h2>
+<ul><li>+1 day (Mon 9 Nov), closed book: write the max-pressure rule and compute a two-phase example you invent.</li><li>+1 week (Sun 15 Nov), closed book: write the EB formula and explain the role of k.</li><li>Study-plan items only; no reminders scheduled.</li></ul>
+</section>
+<section id="section-12"><h2>Hints</h2>
+<details class="solution"><summary>Show hints (try first)</summary>
+<ul><li>Task 2(c): multiply each queue difference by its own saturation flow before summing; units are vehicles × vehicles per hour, so only comparisons matter.</li><li>Task 2(d): think about pedestrian clearance, minimum green, and an approach that never wins.</li><li>Task 1: if you&#x27;re stuck on verify.py, start by recomputing data MSE from the CSV and comparing with a tolerance.</li></ul>
+</details>
+</section>
+<section id="section-13"><h2>Scoreboard</h2>
+<div class="table-wrap"><table id="table-13"><thead><tr><th scope="col">Category</th><th scope="col">Points</th><th scope="col">Score</th></tr></thead><tbody>
+<tr><td>Terminology</td><td>15</td><td>Not assessed</td></tr>
+<tr><td>Concepts</td><td>25</td><td>Not assessed</td></tr>
+<tr><td>Math / technical</td><td>20</td><td>Not assessed</td></tr>
+<tr><td>Coding / experiment</td><td>20</td><td>Not assessed</td></tr>
+<tr><td>Paper synthesis</td><td>10</td><td>Not assessed</td></tr>
+<tr><td>Communication</td><td>10</td><td>Not assessed</td></tr>
+</tbody></table></div>
+</section>
+<section id="sources"><h2>Sources</h2><ul>
+<li id="S1"><strong>[S1]</strong> <a href="https://arxiv.org/abs/2611.07526">arXiv 2611.07526 — Understanding Data Influence in Transportation Networks: A Physics-Constrained Influence-Function Framework</a>
+ · submitted 2026-11-05 (per search excerpt)
+ · abstract excerpt from one search result; page not opened; a second search could not find it
+</li>
+<li id="S3"><strong>[S3]</strong> <a href="https://arxiv.org/abs/2611.04029">arXiv 2611.04029 — A Review of Max-Pressure Traffic Signal Control Algorithms: State of the Art and Research Opportunities</a>
+ · submitted 2026-11-02 (per search excerpt)
+ · abstract excerpt only
+</li>
+<li id="N2"><strong>[N2]</strong> Progress (no submissions for pack #1)
+ · notebook/progress.md
+</li>
+</ul></section>
+</main>
+</body></html>

@@ -1,0 +1,268 @@
+{
+ "eyebrow": "WELCOME TO THE ROOM · Training pack #2",
+ "title": "Training pack — week of 8 Nov 2026",
+ "date": "Set Sun 2026-11-08 (America/New_York) · due Sat 2026-11-14 23:59 · budget 7.25 h",
+ "summary": "No work came in for pack #1, so this pack is lighter and carries its core forward: finish the Residual Lab and the Empirical Bayes derivation. One new idea is added, max-pressure signal control, because it is the most deployable method in this week's briefing [S3]. If you already started pack #1, submit what you have; partial work is graded on what it shows.",
+ "notice": "Scores start Not assessed. Pack #1 tasks not listed here stay open as optional; nothing is penalized for being late.",
+ "sections": [
+  {
+   "title": "This week's focus",
+   "table": {
+    "headers": [
+     "#",
+     "Skill",
+     "Owner",
+     "Tag",
+     "Observable objective"
+    ],
+    "rows": [
+     [
+      "1",
+      "Verified Physics Residual Lab (carried over)",
+      "P1, P3",
+      "Learn now",
+      "Pack #1 Task 1 acceptance criteria, unchanged."
+     ],
+     [
+      "2",
+      "Empirical Bayes derivation (carried over)",
+      "P1, P5",
+      "Learn now",
+      "Pack #1 Task 2 (a) and (b)."
+     ],
+     [
+      "3",
+      "Max-pressure signal control",
+      "P5, P1",
+      "Learn now",
+      "You compute phase pressures by hand, including a spillback case, and explain when max-pressure fails."
+     ],
+     [
+      "4",
+      "Customer discovery (carried over)",
+      "P2",
+      "Practice next",
+      "Five interview questions; now aimed at a TMC detector-maintenance engineer or an SS4A city engineer, your choice."
+     ],
+     [
+      "5",
+      "Physics-constrained influence functions",
+      "P1",
+      "Explore later",
+      "Not this week; next after the Residual Lab [S1]."
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Recognize",
+   "bullets": [
+    "Max-pressure: choose the phase with the largest weighted sum of upstream minus downstream queues.",
+    "Saturation flow: the maximum discharge rate of a movement during green, in vehicles per hour of green.",
+    "Spillback: a downstream link fills up, so vehicles cannot leave the intersection even on green.",
+    "Actuated control: green times extend or end based on detector calls; the realistic baseline for any new controller.",
+    "Occupancy: fraction of time a loop detector is covered; not the same as queue length.",
+    "Influence function: first-order estimate of how a model changes when one training point is removed."
+   ]
+  },
+  {
+   "title": "Understand · Max-pressure in one intersection",
+   "paragraphs": [
+    "Intuition: give green to the movements that would move the most vehicles from a crowded place to an empty place. If the downstream link is full, sending vehicles there achieves nothing.",
+    "Formulation: for a movement from link i to link j with saturation flow s, its weight is s × (q_i − q_j), where q is the queue. A phase's pressure is the sum of its movements' weights. Max-pressure picks the phase with the largest pressure at each decision step.",
+    "Worked example (checked; all s equal to 1): Phase A serves N→S with queue 12 (downstream queue 4) and S→N with queue 8 (downstream 6): pressure = (12 − 4) + (8 − 6) = 10. Phase B serves E→W with 10 (downstream 2) and W→E with 5 (downstream 9): pressure = (10 − 2) + (5 − 9) = 4. Choose Phase A.",
+    "Notice the negative term: W→E pushes vehicles into a fuller link, so it lowers Phase B's pressure. That is how max-pressure reacts to spillback without a network model.",
+    "Why it matters: it is decentralized, needs only local measurements, and has a throughput-optimality result under its queueing assumptions [S3]. Limitation: it needs queue lengths; most detectors report occupancy, and it ignores coordination and pedestrian phases unless added. Simpler alternative: well-tuned actuated control is often enough at isolated, under-saturated intersections."
+   ]
+  },
+  {
+   "title": "Task 1 · Coding: Residual Lab (carried over · 20 pts · 2.5 h · P3/P4)",
+   "paragraphs": [
+    "Exactly as pack #1, Task 1: fit.py, baseline.py, verify.py, plot, README, and the three failure cases (FAIL / UNKNOWN / UNKNOWN). If time runs short, submit fit.py and verify.py first; they carry most of the points."
+   ]
+  },
+  {
+   "title": "Task 2 · Math (20 pts · 1.75 h · P1/P5)",
+   "bullets": [
+    "(a) Carried over: show â is unbiased with Var(â) = σ² / Σφᵢ².",
+    "(b) Carried over: derive the EB weight from the gamma-Poisson model.",
+    "(c) New: an intersection has Phase A (N→S: upstream 14, downstream 3, s = 1800; S→N: upstream 6, downstream 6, s = 1800) and Phase B (E→W: upstream 9, downstream 1, s = 1200; W→E: upstream 11, downstream 20, s = 1200). Compute both pressures and choose a phase. Then the E→W downstream link fills to 12: recompute and explain the change.",
+    "(d) New: give one situation where max-pressure's choice is unsafe or unacceptable to an agency even though its pressure is highest."
+   ]
+  },
+  {
+   "title": "Task 3 · Paper reading (10 pts · 1.0 h · P5)",
+   "paragraphs": [
+    "Read the max-pressure review, arXiv 2611.04029 [S3]. ROOM only saw its abstract excerpt; confirm everything against the paper."
+   ],
+   "bullets": [
+    "What is the original throughput-optimality claim, and which assumptions does it need?",
+    "How has the pressure definition changed, and why?",
+    "Which extension addresses queues measured imperfectly (or occupancy only), if any?",
+    "One open problem the review lists that you could test in SUMO within 15 hours."
+   ]
+  },
+  {
+   "title": "Task 4 · Customer discovery (Communication · 0.5 h · P2)",
+   "paragraphs": [
+    "Five interview questions, no pitching. Choose your audience: a TMC or ITS maintenance engineer (detector health) or a city engineer with an SS4A award. Include one question on what they spend today."
+   ]
+  },
+  {
+   "title": "Task 5 · Quiz, written answers (Terminology 15 + Concepts 25 · 0.5 h)",
+   "bullets": [
+    "In one sentence each: saturation flow, spillback, occupancy, actuated control.",
+    "Why does a full downstream link lower a phase's pressure, and why is that useful?",
+    "Why is fixed-time control a weak baseline for a new adaptive controller?",
+    "A vision-language controller matches a structured-state controller. What would you need to see before calling it better?",
+    "Design an experiment that could refute: 'Max-pressure always beats actuated control.' State the metric and the result that would refute it."
+   ]
+  },
+  {
+   "title": "Time budget",
+   "table": {
+    "headers": [
+     "Block",
+     "Hours"
+    ],
+    "rows": [
+     [
+      "Read the max-pressure section",
+      "0.5"
+     ],
+     [
+      "Task 1 coding (carried over)",
+      "2.5"
+     ],
+     [
+      "Task 2 math (a)–(d)",
+      "1.75"
+     ],
+     [
+      "Task 3 reading",
+      "1.0"
+     ],
+     [
+      "Task 4 interview questions",
+      "0.5"
+     ],
+     [
+      "Task 5 quiz",
+      "0.5"
+     ],
+     [
+      "Retrieval (+1 day, +1 week)",
+      "0.25"
+     ],
+     [
+      "Buffer for setup",
+      "0.25"
+     ],
+     [
+      "Total",
+      "7.25"
+     ],
+     [
+      "Optional from pack #1: article (Task 5) and room synthesis (Task 7)",
+      "+2.0"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Checklist",
+   "checklist": [
+    "Read the max-pressure section",
+    "Task 1: fit.py and verify.py (then baseline, plot, README)",
+    "Task 2 (a)–(d)",
+    "Task 3 reading answers",
+    "Task 4 five questions",
+    "Task 5 quiz",
+    "Retrieval +1 day and +1 week",
+    "Submit with /room grade"
+   ]
+  },
+  {
+   "title": "Retrieval checkpoints",
+   "bullets": [
+    "+1 day (Mon 9 Nov), closed book: write the max-pressure rule and compute a two-phase example you invent.",
+    "+1 week (Sun 15 Nov), closed book: write the EB formula and explain the role of k.",
+    "Study-plan items only; no reminders scheduled."
+   ]
+  },
+  {
+   "title": "Hints",
+   "collapsible": true,
+   "solution": true,
+   "summary_label": "Show hints (try first)",
+   "bullets": [
+    "Task 2(c): multiply each queue difference by its own saturation flow before summing; units are vehicles × vehicles per hour, so only comparisons matter.",
+    "Task 2(d): think about pedestrian clearance, minimum green, and an approach that never wins.",
+    "Task 1: if you're stuck on verify.py, start by recomputing data MSE from the CSV and comparing with a tolerance."
+   ]
+  },
+  {
+   "title": "Scoreboard",
+   "table": {
+    "headers": [
+     "Category",
+     "Points",
+     "Score"
+    ],
+    "rows": [
+     [
+      "Terminology",
+      "15",
+      "Not assessed"
+     ],
+     [
+      "Concepts",
+      "25",
+      "Not assessed"
+     ],
+     [
+      "Math / technical",
+      "20",
+      "Not assessed"
+     ],
+     [
+      "Coding / experiment",
+      "20",
+      "Not assessed"
+     ],
+     [
+      "Paper synthesis",
+      "10",
+      "Not assessed"
+     ],
+     [
+      "Communication",
+      "10",
+      "Not assessed"
+     ]
+    ]
+   }
+  }
+ ],
+ "sources": [
+  {
+   "id": "S1",
+   "title": "arXiv 2611.07526 — Understanding Data Influence in Transportation Networks: A Physics-Constrained Influence-Function Framework",
+   "url": "https://arxiv.org/abs/2611.07526",
+   "date": "submitted 2026-11-05 (per search excerpt)",
+   "note": "abstract excerpt from one search result; page not opened; a second search could not find it"
+  },
+  {
+   "id": "S3",
+   "title": "arXiv 2611.04029 — A Review of Max-Pressure Traffic Signal Control Algorithms: State of the Art and Research Opportunities",
+   "url": "https://arxiv.org/abs/2611.04029",
+   "date": "submitted 2026-11-02 (per search excerpt)",
+   "note": "abstract excerpt only"
+  },
+  {
+   "id": "N2",
+   "title": "Progress (no submissions for pack #1)",
+   "path": "notebook/progress.md"
+  }
+ ]
+}
